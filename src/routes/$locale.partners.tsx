@@ -47,7 +47,7 @@ function PartnersPage() {
             </li>
           ))}
         </ul>
-        <p className="mt-10 text-sm text-muted-foreground">{t.common.placeholder}</p>
+        <p className="mt-10 max-w-2xl text-sm text-muted-foreground">{t.partners.note}</p>
       </section>
     </>
   );
