@@ -32,7 +32,7 @@ export const fr = {
     heroCta2: "Devenir partenaire",
     introTitle: "Qui sommes-nous",
     introText:
-      "[Texte provisoire] Créée par des professionnels de la santé et de l'environnement, l'AMAA accompagne les acteurs publics et privés dans la gestion des boues de vidange, la sensibilisation des populations et la formation des travailleurs de l'assainissement.",
+      "[Texte provisoire] Créée par des professionnels de la santé et de l'en",
     figuresTitle: "Notre impact en chiffres",
     figures: [
       { value: "12 000+", label: "Personnes sensibilisées" },
