@@ -121,7 +121,7 @@ export async function listRows(ctx: Ctx, table: string, orderBy: string) {
 
 export async function upsertRow(ctx: Ctx, table: string, row: Record<string, unknown>) {
   const payload = { ...row };
-  if (!payload.id) delete payload.id;
+  if (!payload["id"]) delete payload["id"];
   const { data, error } = await ctx.supabase.from(table).upsert(payload).select().single();
   if (error) throw new Error(error.message);
   return data;
