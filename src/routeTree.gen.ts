@@ -14,6 +14,7 @@ import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
+import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
 import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
 import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
@@ -44,6 +45,11 @@ const LocaleActionsRoute = LocaleActionsRouteImport.update({
   path: '/actions',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleGalleryRoute = LocaleGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/gallery'
     | '/$locale/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/gallery'
     | '/$locale'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/gallery'
     | '/$locale/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -175,6 +187,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleActionsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/gallery': {
+      id: '/$locale/gallery'
+      path: '/gallery'
+      fullPath: '/$locale/gallery'
+      preLoaderRoute: typeof LocaleGalleryRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/news/': {
       id: '/$locale/news/'
       path: '/news'
@@ -209,6 +228,7 @@ declare module '@tanstack/react-router' {
 interface LocaleRouteChildren {
   LocaleAboutRoute: typeof LocaleAboutRoute
   LocaleActionsRoute: typeof LocaleActionsRoute
+  LocaleGalleryRoute: typeof LocaleGalleryRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleNewsSlugRoute: typeof LocaleNewsSlugRoute
   LocaleProjectsSlugRoute: typeof LocaleProjectsSlugRoute
@@ -219,6 +239,7 @@ interface LocaleRouteChildren {
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleAboutRoute: LocaleAboutRoute,
   LocaleActionsRoute: LocaleActionsRoute,
+  LocaleGalleryRoute: LocaleGalleryRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleNewsSlugRoute: LocaleNewsSlugRoute,
   LocaleProjectsSlugRoute: LocaleProjectsSlugRoute,
