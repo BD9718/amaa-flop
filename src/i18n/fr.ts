@@ -223,6 +223,6 @@ export const fr = {
       description: "Contactez l'AMAA : téléphone, e-mail, WhatsApp et formulaire de contact.",
     },
   },
-} as const;
+};
 
 export type Dict = typeof fr;
