@@ -308,6 +308,89 @@ export const projects: Project[] = [
       },
     ],
   },
+  {
+    slug: "traitement-boues-vidange",
+    status: "upcoming",
+    cover: media.sludgeTreatment,
+    coverAlt: {
+      fr: "Vue aérienne d'un site de traitement des boues de vidange : bassins et lits de séchage",
+      ar: "منظر جوي لموقع معالجة حمأة الصرف: أحواض وأسرّة تجفيف",
+      en: "Aerial view of a faecal sludge treatment site: ponds and drying beds",
+    },
+    title: {
+      fr: "Traitement des boues de vidange",
+      ar: "معالجة حمأة الصرف",
+      en: "Faecal sludge treatment",
+    },
+    summary: {
+      fr: "Appui à la mise en place et au suivi de sites de traitement des boues de vidange : bassins, lits de séchage et contrôle qualité.",
+      ar: "دعم إنشاء ومتابعة مواقع معالجة حمأة الصرف: الأحواض، أسرّة التجفيف، ومراقبة الجودة.",
+      en: "Support for the development and monitoring of faecal sludge treatment sites: ponds, drying beds and quality control.",
+    },
+    location: { fr: "Nouakchott et communes périphériques, Mauritanie", ar: "نواكشوط والبلديات المجاورة، موريتانيا", en: "Nouakchott and surrounding municipalities, Mauritania" },
+    period: { fr: "2026–2027", ar: "2026–2027", en: "2026–2027" },
+    context: {
+      fr: "Les boues collectées par les opérateurs de vidange sont trop souvent déversées sans traitement, au détriment de la santé publique et de l'environnement.",
+      ar: "تُلقى الحمأة التي يجمعها مشغلو التفريغ غالباً دون معالجة، مما يضر بالصحة العامة والبيئة.",
+      en: "Sludge collected by emptying operators is too often discharged untreated, harming public health and the environment.",
+    },
+    problem: {
+      fr: "Absence d'infrastructures de traitement adaptées, risques de contamination des nappes et nuisances pour les populations riveraines.",
+      ar: "غياب منشآت معالجة ملائمة، ومخاطر تلوث المياه الجوفية، وإزعاج للسكان المجاورين.",
+      en: "Lack of suitable treatment infrastructure, risk of groundwater contamination and nuisance for nearby residents.",
+    },
+    objectives: {
+      fr: [
+        "Sécuriser les sites de dépotage et de traitement",
+        "Suivre la qualité des boues traitées et des rejets",
+        "Former les gestionnaires des installations",
+      ],
+      ar: ["تأمين مواقع التفريغ والمعالجة", "متابعة جودة الحمأة المعالجة والمياه المصروفة", "تكوين مدبّري المنشآت"],
+      en: [
+        "Secure discharge and treatment sites",
+        "Monitor the quality of treated sludge and effluents",
+        "Train facility managers",
+      ],
+    },
+    beneficiaries: {
+      fr: "Populations riveraines, opérateurs de vidange et collectivités",
+      ar: "السكان المجاورون ومشغلو التفريغ والجماعات المحلية",
+      en: "Nearby residents, emptying operators and local authorities",
+    },
+    activities: {
+      fr: [
+        "Diagnostic des sites existants",
+        "Appui technique au dimensionnement des bassins et lits de séchage",
+        "Mise en place d'un protocole de contrôle qualité",
+      ],
+      ar: ["تشخيص المواقع القائمة", "دعم تقني لتحديد أبعاد الأحواض وأسرّة التجفيف", "وضع بروتوكول لمراقبة الجودة"],
+      en: [
+        "Assessment of existing sites",
+        "Technical support for pond and drying-bed sizing",
+        "Introduction of a quality-control protocol",
+      ],
+    },
+    results: {
+      fr: "Objectif visé : des sites de traitement opérationnels, contrôlés et intégrés à la filière d'assainissement de Nouakchott.",
+      ar: "الهدف المنشود: مواقع معالجة جاهزة للعمل وخاضعة للمراقبة ومدمجة في سلسلة الإصحاح بنواكشوط.",
+      en: "Target outcome: operational, monitored treatment sites integrated into Nouakchott's sanitation chain.",
+    },
+    partners: {
+      fr: "Services techniques de l'assainissement, communes concernées et opérateurs privés de vidange",
+      ar: "المصالح التقنية للإصحاح، البلديات المعنية، ومشغلو التفريغ الخاصون",
+      en: "Sanitation technical services, the municipalities concerned and private emptying operators",
+    },
+    gallery: [
+      {
+        src: media.sludgeTreatment,
+        alt: {
+          fr: "Bassins et lits de séchage d'un site de traitement des boues de vidange",
+          ar: "أحواض وأسرّة تجفيف في موقع لمعالجة حمأة الصرف",
+          en: "Ponds and drying beds at a faecal sludge treatment site",
+        },
+      },
+    ],
+  },
 ];
 
 export type NewsArticle = {
@@ -487,6 +570,15 @@ export const gallery: GalleryItem[] = [
       fr: "Oasis mauritanienne : une ressource en eau à préserver",
       ar: "واحة موريتانية: موارد مائية تستحق الحماية",
       en: "A Mauritanian oasis: a water resource to preserve",
+    },
+  },
+  {
+    src: media.sludgeTreatment,
+    category: "assainissement",
+    caption: {
+      fr: "Traitement des boues de vidange : bassins et lits de séchage",
+      ar: "معالجة حمأة الصرف: أحواض وأسرّة تجفيف",
+      en: "Faecal sludge treatment: ponds and drying beds",
     },
   },
 ];
