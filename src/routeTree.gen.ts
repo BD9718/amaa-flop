@@ -11,12 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
 import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
 import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
 import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
@@ -30,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -62,6 +69,11 @@ const LocalePartnersRoute = LocalePartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
 const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -86,11 +98,13 @@ const LocaleProjectsSlugRoute = LocaleProjectsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/login': typeof AdminLoginRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -99,11 +113,13 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/login': typeof AdminLoginRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -114,11 +130,13 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/login': typeof AdminLoginRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
@@ -130,11 +148,13 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/admin'
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/login'
     | '/$locale/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -143,11 +163,13 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/login'
     | '/$locale'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -157,11 +179,13 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/admin'
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/login'
     | '/$locale/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
@@ -172,6 +196,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -188,6 +213,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -231,6 +263,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/partners'
       preLoaderRoute: typeof LocalePartnersRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/$locale/news/': {
       id: '/$locale/news/'
@@ -292,9 +331,20 @@ const LocaleRouteChildren: LocaleRouteChildren = {
 const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren)
 
+interface AdminRouteChildren {
+  AdminLoginRoute: typeof AdminLoginRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminLoginRoute: AdminLoginRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
