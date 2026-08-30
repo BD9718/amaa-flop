@@ -1,10 +1,11 @@
-# Phase 2 — Back-office AMAA
+# AMAA — Phase 2 (Back-office admin)
 
-- [ ] Schéma DB : user_roles + has_role, projects, news, gallery_items, partners, key_figures, contact_messages (GRANT + RLS)
-- [ ] Seed : contenu existant (data.ts) inséré en base via migration
-- [ ] Auth admin : page /admin/login (email+mot de passe), gate _authenticated, rôle admin
-- [ ] Layout /admin : sidebar, tableau de bord
-- [ ] CRUD : projets, actualités, galerie, partenaires, chiffres clés, messages de contact
-- [ ] Upload d'images (bucket storage)
-- [ ] Pages publiques lisent la base au lieu de data.ts (fallback data.ts)
-- [ ] Vérification end-to-end
+- [x] Schéma DB : user_roles, projects, news, gallery_items, partners, key_figures, contact_messages (RLS + grants)
+- [x] Seed du contenu existant (5 projets, 3 actus, 5 photos, 8 partenaires, 4 chiffres)
+- [ ] Bucket de stockage `media` pour les images
+- [ ] Auth admin (page de connexion, gate par rôle)
+- [ ] Dashboard admin (vue d'ensemble + messages de contact)
+- [ ] CRUD projets / actualités / galerie / partenaires / chiffres clés
+- [ ] Upload d'images avec optimisation
+- [ ] Pages publiques alimentées par la base
+- [ ] Créer le premier compte admin (utilisateur)
