@@ -176,11 +176,17 @@ function ContactPage() {
               />
               {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
             </div>
+            {sendError && (
+              <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                {f.errSend}
+              </p>
+            )}
             <button
               type="submit"
-              className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary-dark"
+              disabled={sending}
+              className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary-dark disabled:opacity-60"
             >
-              {f.send}
+              {sending ? f.sending : f.send}
             </button>
           </form>
         </div>
