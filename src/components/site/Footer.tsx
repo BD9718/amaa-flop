@@ -74,7 +74,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <p>
             © {new Date().getFullYear()} {t.footer.tagline}. {t.footer.rights}
           </p>
-          <p>{t.common.placeholder}</p>
+          <p>{t.footer.legal}</p>
         </div>
       </div>
     </footer>
