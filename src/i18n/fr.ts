@@ -167,7 +167,7 @@ export const fr = {
     email: "E-mail",
     whatsapp: "WhatsApp",
     address: "Adresse",
-    addressValue: "Nouakchott, Mauritanie",
+    addressValue: "3XVX+P93Nouakchott, Mauritanie",
     formTitle: "Écrivez-nous",
     form: {
       name: "Nom complet",
