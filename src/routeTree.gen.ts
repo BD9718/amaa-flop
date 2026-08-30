@@ -15,6 +15,7 @@ import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
 import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
+import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
 import { Route as LocaleProjectsSlugRouteImport } from './routes/$locale.projects.$slug'
 
@@ -48,6 +49,11 @@ const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
   path: '/news/',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleNewsSlugRoute = LocaleNewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleProjectsIndexRoute = LocaleProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news': typeof LocaleNewsIndexRoute
   '/$locale/projects': typeof LocaleProjectsIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/'
+    | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news/'
     | '/$locale/projects/'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale'
+    | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news'
     | '/$locale/projects'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/'
+    | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news/'
     | '/$locale/projects/'
@@ -170,6 +182,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleNewsIndexRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/news/$slug': {
+      id: '/$locale/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/$locale/news/$slug'
+      preLoaderRoute: typeof LocaleNewsSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/projects/': {
       id: '/$locale/projects/'
       path: '/projects'
@@ -191,6 +210,7 @@ interface LocaleRouteChildren {
   LocaleAboutRoute: typeof LocaleAboutRoute
   LocaleActionsRoute: typeof LocaleActionsRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleNewsSlugRoute: typeof LocaleNewsSlugRoute
   LocaleProjectsSlugRoute: typeof LocaleProjectsSlugRoute
   LocaleNewsIndexRoute: typeof LocaleNewsIndexRoute
   LocaleProjectsIndexRoute: typeof LocaleProjectsIndexRoute
@@ -200,6 +220,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleAboutRoute: LocaleAboutRoute,
   LocaleActionsRoute: LocaleActionsRoute,
   LocaleIndexRoute: LocaleIndexRoute,
+  LocaleNewsSlugRoute: LocaleNewsSlugRoute,
   LocaleProjectsSlugRoute: LocaleProjectsSlugRoute,
   LocaleNewsIndexRoute: LocaleNewsIndexRoute,
   LocaleProjectsIndexRoute: LocaleProjectsIndexRoute,
