@@ -27,7 +27,7 @@ export const fr = {
     heroKicker: "Association Mauritanienne pour l'Assainissement",
     heroTitle: "L’assainissement, une priorité majeure pour la Mauritanie.",
     heroText:
-      "[Texte provisoire] L'AMAA œuvre en Mauritanie pour l'assainissement, la santé publique et la protection de l'environnement, aux côtés des institutions, des collectivités et des partenaires techniques.",
+      "L’AMAA œuvre en Mauritanie en faveur de l’assainissement, de la santé publique et de la protection de l’environnement, aux côtés des institutions, des collectivités et de ses partenaires opérationnels",
     heroCta: "Découvrir nos projets",
     heroCta2: "Devenir partenaire",
     introTitle: "Qui sommes-nous",
