@@ -181,6 +181,7 @@ export const fr = {
       errEmail: "Veuillez indiquer une adresse e-mail valide.",
       errSubject: "Veuillez indiquer un objet (3 caractères minimum).",
       errMessage: "Votre message doit contenir au moins 20 caractères.",
+      errSend: "L'envoi a échoué. Veuillez réessayer dans un instant.",
     },
   },
   footer: {
