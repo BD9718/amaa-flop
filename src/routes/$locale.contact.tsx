@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { useState } from "react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { contactInfo } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale } from "@/i18n";
+import { submitContactMessage } from "@/lib/contact.functions";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/contact")({
@@ -27,12 +29,16 @@ function ContactPage() {
   const locale = normalizeLocale(Route.useParams().locale);
   const t = getDict(locale);
   const f = t.contact.form;
+  const send = useServerFn(submitContactMessage);
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const data = new FormData(form);
     const name = String(data.get("name") ?? "").trim();
     const email = String(data.get("email") ?? "").trim();
     const subject = String(data.get("subject") ?? "").trim();
@@ -45,9 +51,18 @@ function ContactPage() {
     if (message.length < 20) next.message = f.errMessage;
 
     setErrors(next);
-    if (Object.keys(next).length === 0) {
+    setSendError(false);
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    try {
+      await send({ data: { name, email, subject, message } });
       setSent(true);
-      e.currentTarget.reset();
+      form.reset();
+    } catch {
+      setSendError(true);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -161,11 +176,17 @@ function ContactPage() {
               />
               {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
             </div>
+            {sendError && (
+              <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                {f.errSend}
+              </p>
+            )}
             <button
               type="submit"
-              className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary-dark"
+              disabled={sending}
+              className="inline-flex rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-colors hover:bg-primary-dark disabled:opacity-60"
             >
-              {f.send}
+              {sending ? f.sending : f.send}
             </button>
           </form>
         </div>

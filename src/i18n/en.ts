@@ -183,6 +183,7 @@ export const en: Dict = {
       errEmail: "Please enter a valid email address.",
       errSubject: "Please enter a subject (at least 3 characters).",
       errMessage: "Your message must contain at least 20 characters.",
+      errSend: "Sending failed. Please try again in a moment.",
     },
   },
   footer: {

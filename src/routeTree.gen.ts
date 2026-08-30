@@ -11,12 +11,21 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
 import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as AdminIndexRouteImport } from './routes/admin/index'
+import { Route as AdminActualitesRouteImport } from './routes/admin/actualites'
+import { Route as AdminChiffresRouteImport } from './routes/admin/chiffres'
+import { Route as AdminGalerieRouteImport } from './routes/admin/galerie'
+import { Route as AdminLoginRouteImport } from './routes/admin/login'
+import { Route as AdminMessagesRouteImport } from './routes/admin/messages'
+import { Route as AdminPartenairesRouteImport } from './routes/admin/partenaires'
+import { Route as AdminProjetsRouteImport } from './routes/admin/projets'
 import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
 import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
@@ -30,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
 const LocaleRoute = LocaleRouteImport.update({
   id: '/$locale',
   path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocaleIndexRoute = LocaleIndexRouteImport.update({
@@ -62,6 +76,46 @@ const LocalePartnersRoute = LocalePartnersRouteImport.update({
   path: '/partners',
   getParentRoute: () => LocaleRoute,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminActualitesRoute = AdminActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminChiffresRoute = AdminChiffresRouteImport.update({
+  id: '/chiffres',
+  path: '/chiffres',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminGalerieRoute = AdminGalerieRouteImport.update({
+  id: '/galerie',
+  path: '/galerie',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPartenairesRoute = AdminPartenairesRouteImport.update({
+  id: '/partenaires',
+  path: '/partenaires',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminProjetsRoute = AdminProjetsRouteImport.update({
+  id: '/projets',
+  path: '/projets',
+  getParentRoute: () => AdminRoute,
+} as any)
 const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
   id: '/news/',
   path: '/news/',
@@ -86,12 +140,21 @@ const LocaleProjectsSlugRoute = LocaleProjectsSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/actualites': typeof AdminActualitesRoute
+  '/admin/chiffres': typeof AdminChiffresRoute
+  '/admin/galerie': typeof AdminGalerieRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/partenaires': typeof AdminPartenairesRoute
+  '/admin/projets': typeof AdminProjetsRoute
   '/$locale/': typeof LocaleIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
@@ -104,7 +167,15 @@ export interface FileRoutesByTo {
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/actualites': typeof AdminActualitesRoute
+  '/admin/chiffres': typeof AdminChiffresRoute
+  '/admin/galerie': typeof AdminGalerieRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/partenaires': typeof AdminPartenairesRoute
+  '/admin/projets': typeof AdminProjetsRoute
   '/$locale': typeof LocaleIndexRoute
+  '/admin': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news': typeof LocaleNewsIndexRoute
@@ -114,12 +185,21 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/admin/actualites': typeof AdminActualitesRoute
+  '/admin/chiffres': typeof AdminChiffresRoute
+  '/admin/galerie': typeof AdminGalerieRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/partenaires': typeof AdminPartenairesRoute
+  '/admin/projets': typeof AdminProjetsRoute
   '/$locale/': typeof LocaleIndexRoute
+  '/admin/': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
@@ -130,12 +210,21 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/admin'
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/actualites'
+    | '/admin/chiffres'
+    | '/admin/galerie'
+    | '/admin/login'
+    | '/admin/messages'
+    | '/admin/partenaires'
+    | '/admin/projets'
     | '/$locale/'
+    | '/admin/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news/'
@@ -148,7 +237,15 @@ export interface FileRouteTypes {
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/actualites'
+    | '/admin/chiffres'
+    | '/admin/galerie'
+    | '/admin/login'
+    | '/admin/messages'
+    | '/admin/partenaires'
+    | '/admin/projets'
     | '/$locale'
+    | '/admin'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news'
@@ -157,12 +254,21 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/admin'
     | '/$locale/about'
     | '/$locale/actions'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/admin/actualites'
+    | '/admin/chiffres'
+    | '/admin/galerie'
+    | '/admin/login'
+    | '/admin/messages'
+    | '/admin/partenaires'
+    | '/admin/projets'
     | '/$locale/'
+    | '/admin/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
     | '/$locale/news/'
@@ -172,6 +278,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -188,6 +295,13 @@ declare module '@tanstack/react-router' {
       path: '/$locale'
       fullPath: '/$locale'
       preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$locale/': {
@@ -231,6 +345,62 @@ declare module '@tanstack/react-router' {
       fullPath: '/$locale/partners'
       preLoaderRoute: typeof LocalePartnersRouteImport
       parentRoute: typeof LocaleRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/actualites': {
+      id: '/admin/actualites'
+      path: '/actualites'
+      fullPath: '/admin/actualites'
+      preLoaderRoute: typeof AdminActualitesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/chiffres': {
+      id: '/admin/chiffres'
+      path: '/chiffres'
+      fullPath: '/admin/chiffres'
+      preLoaderRoute: typeof AdminChiffresRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/galerie': {
+      id: '/admin/galerie'
+      path: '/galerie'
+      fullPath: '/admin/galerie'
+      preLoaderRoute: typeof AdminGalerieRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/partenaires': {
+      id: '/admin/partenaires'
+      path: '/partenaires'
+      fullPath: '/admin/partenaires'
+      preLoaderRoute: typeof AdminPartenairesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/projets': {
+      id: '/admin/projets'
+      path: '/projets'
+      fullPath: '/admin/projets'
+      preLoaderRoute: typeof AdminProjetsRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/$locale/news/': {
       id: '/$locale/news/'
@@ -292,9 +462,34 @@ const LocaleRouteChildren: LocaleRouteChildren = {
 const LocaleRouteWithChildren =
   LocaleRoute._addFileChildren(LocaleRouteChildren)
 
+interface AdminRouteChildren {
+  AdminActualitesRoute: typeof AdminActualitesRoute
+  AdminChiffresRoute: typeof AdminChiffresRoute
+  AdminGalerieRoute: typeof AdminGalerieRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
+  AdminPartenairesRoute: typeof AdminPartenairesRoute
+  AdminProjetsRoute: typeof AdminProjetsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminActualitesRoute: AdminActualitesRoute,
+  AdminChiffresRoute: AdminChiffresRoute,
+  AdminGalerieRoute: AdminGalerieRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
+  AdminPartenairesRoute: AdminPartenairesRoute,
+  AdminProjetsRoute: AdminProjetsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
