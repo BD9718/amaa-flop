@@ -92,6 +92,10 @@ function GalleryPage() {
             </li>
           ))}
         </ul>
+
+        {items.length === 0 && (
+          <p className="mt-10 text-sm text-muted-foreground">{t.common.empty}</p>
+        )}
       </section>
 
       {active && (
