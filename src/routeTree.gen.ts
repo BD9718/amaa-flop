@@ -14,6 +14,7 @@ import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
+import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
 import { Route as LocaleProjectsSlugRouteImport } from './routes/$locale.projects.$slug'
 
@@ -42,6 +43,11 @@ const LocaleActionsRoute = LocaleActionsRouteImport.update({
   path: '/actions',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleProjectsIndexRoute = LocaleProjectsIndexRouteImport.update({
   id: '/projects/',
   path: '/projects/',
@@ -60,6 +66,7 @@ export interface FileRoutesByFullPath {
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
 export interface FileRoutesByTo {
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale': typeof LocaleIndexRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news': typeof LocaleNewsIndexRoute
   '/$locale/projects': typeof LocaleProjectsIndexRoute
 }
 export interface FileRoutesById {
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/$locale/actions': typeof LocaleActionsRoute
   '/$locale/': typeof LocaleIndexRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
 export interface FileRouteTypes {
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/$locale/actions'
     | '/$locale/'
     | '/$locale/projects/$slug'
+    | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -97,6 +107,7 @@ export interface FileRouteTypes {
     | '/$locale/actions'
     | '/$locale'
     | '/$locale/projects/$slug'
+    | '/$locale/news'
     | '/$locale/projects'
   id:
     | '__root__'
@@ -106,6 +117,7 @@ export interface FileRouteTypes {
     | '/$locale/actions'
     | '/$locale/'
     | '/$locale/projects/$slug'
+    | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesById: FileRoutesById
 }
@@ -151,6 +163,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleActionsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/news/': {
+      id: '/$locale/news/'
+      path: '/news'
+      fullPath: '/$locale/news/'
+      preLoaderRoute: typeof LocaleNewsIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/projects/': {
       id: '/$locale/projects/'
       path: '/projects'
@@ -173,6 +192,7 @@ interface LocaleRouteChildren {
   LocaleActionsRoute: typeof LocaleActionsRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleProjectsSlugRoute: typeof LocaleProjectsSlugRoute
+  LocaleNewsIndexRoute: typeof LocaleNewsIndexRoute
   LocaleProjectsIndexRoute: typeof LocaleProjectsIndexRoute
 }
 
@@ -181,6 +201,7 @@ const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleActionsRoute: LocaleActionsRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleProjectsSlugRoute: LocaleProjectsSlugRoute,
+  LocaleNewsIndexRoute: LocaleNewsIndexRoute,
   LocaleProjectsIndexRoute: LocaleProjectsIndexRoute,
 }
 
