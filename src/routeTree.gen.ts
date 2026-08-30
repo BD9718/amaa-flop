@@ -10,33 +10,168 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
+import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
+import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
+import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
+import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
+import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
+import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
+import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
+import { Route as LocaleProjectsSlugRouteImport } from './routes/$locale.projects.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocaleRoute = LocaleRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleAboutRoute = LocaleAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleActionsRoute = LocaleActionsRouteImport.update({
+  id: '/actions',
+  path: '/actions',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleContactRoute = LocaleContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleGalleryRoute = LocaleGalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocalePartnersRoute = LocalePartnersRouteImport.update({
+  id: '/partners',
+  path: '/partners',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleNewsIndexRoute = LocaleNewsIndexRouteImport.update({
+  id: '/news/',
+  path: '/news/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleNewsSlugRoute = LocaleNewsSlugRouteImport.update({
+  id: '/news/$slug',
+  path: '/news/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleProjectsIndexRoute = LocaleProjectsIndexRouteImport.update({
+  id: '/projects/',
+  path: '/projects/',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleProjectsSlugRoute = LocaleProjectsSlugRouteImport.update({
+  id: '/projects/$slug',
+  path: '/projects/$slug',
+  getParentRoute: () => LocaleRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
+  '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
+  '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news/': typeof LocaleNewsIndexRoute
+  '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
+  '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
+  '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news': typeof LocaleNewsIndexRoute
+  '/$locale/projects': typeof LocaleProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/$locale': typeof LocaleRouteWithChildren
+  '/$locale/about': typeof LocaleAboutRoute
+  '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/gallery': typeof LocaleGalleryRoute
+  '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale/': typeof LocaleIndexRoute
+  '/$locale/news/$slug': typeof LocaleNewsSlugRoute
+  '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/$locale/news/': typeof LocaleNewsIndexRoute
+  '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/$locale/about'
+    | '/$locale/actions'
+    | '/$locale/contact'
+    | '/$locale/gallery'
+    | '/$locale/partners'
+    | '/$locale/'
+    | '/$locale/news/$slug'
+    | '/$locale/projects/$slug'
+    | '/$locale/news/'
+    | '/$locale/projects/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/$locale/about'
+    | '/$locale/actions'
+    | '/$locale/contact'
+    | '/$locale/gallery'
+    | '/$locale/partners'
+    | '/$locale'
+    | '/$locale/news/$slug'
+    | '/$locale/projects/$slug'
+    | '/$locale/news'
+    | '/$locale/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/$locale/about'
+    | '/$locale/actions'
+    | '/$locale/contact'
+    | '/$locale/gallery'
+    | '/$locale/partners'
+    | '/$locale/'
+    | '/$locale/news/$slug'
+    | '/$locale/projects/$slug'
+    | '/$locale/news/'
+    | '/$locale/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LocaleRoute: typeof LocaleRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +183,118 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/about': {
+      id: '/$locale/about'
+      path: '/about'
+      fullPath: '/$locale/about'
+      preLoaderRoute: typeof LocaleAboutRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/actions': {
+      id: '/$locale/actions'
+      path: '/actions'
+      fullPath: '/$locale/actions'
+      preLoaderRoute: typeof LocaleActionsRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/contact': {
+      id: '/$locale/contact'
+      path: '/contact'
+      fullPath: '/$locale/contact'
+      preLoaderRoute: typeof LocaleContactRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/gallery': {
+      id: '/$locale/gallery'
+      path: '/gallery'
+      fullPath: '/$locale/gallery'
+      preLoaderRoute: typeof LocaleGalleryRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/partners': {
+      id: '/$locale/partners'
+      path: '/partners'
+      fullPath: '/$locale/partners'
+      preLoaderRoute: typeof LocalePartnersRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/news/': {
+      id: '/$locale/news/'
+      path: '/news'
+      fullPath: '/$locale/news/'
+      preLoaderRoute: typeof LocaleNewsIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/news/$slug': {
+      id: '/$locale/news/$slug'
+      path: '/news/$slug'
+      fullPath: '/$locale/news/$slug'
+      preLoaderRoute: typeof LocaleNewsSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/projects/': {
+      id: '/$locale/projects/'
+      path: '/projects'
+      fullPath: '/$locale/projects/'
+      preLoaderRoute: typeof LocaleProjectsIndexRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/projects/$slug': {
+      id: '/$locale/projects/$slug'
+      path: '/projects/$slug'
+      fullPath: '/$locale/projects/$slug'
+      preLoaderRoute: typeof LocaleProjectsSlugRouteImport
+      parentRoute: typeof LocaleRoute
+    }
   }
 }
 
+interface LocaleRouteChildren {
+  LocaleAboutRoute: typeof LocaleAboutRoute
+  LocaleActionsRoute: typeof LocaleActionsRoute
+  LocaleContactRoute: typeof LocaleContactRoute
+  LocaleGalleryRoute: typeof LocaleGalleryRoute
+  LocalePartnersRoute: typeof LocalePartnersRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+  LocaleNewsSlugRoute: typeof LocaleNewsSlugRoute
+  LocaleProjectsSlugRoute: typeof LocaleProjectsSlugRoute
+  LocaleNewsIndexRoute: typeof LocaleNewsIndexRoute
+  LocaleProjectsIndexRoute: typeof LocaleProjectsIndexRoute
+}
+
+const LocaleRouteChildren: LocaleRouteChildren = {
+  LocaleAboutRoute: LocaleAboutRoute,
+  LocaleActionsRoute: LocaleActionsRoute,
+  LocaleContactRoute: LocaleContactRoute,
+  LocaleGalleryRoute: LocaleGalleryRoute,
+  LocalePartnersRoute: LocalePartnersRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+  LocaleNewsSlugRoute: LocaleNewsSlugRoute,
+  LocaleProjectsSlugRoute: LocaleProjectsSlugRoute,
+  LocaleNewsIndexRoute: LocaleNewsIndexRoute,
+  LocaleProjectsIndexRoute: LocaleProjectsIndexRoute,
+}
+
+const LocaleRouteWithChildren =
+  LocaleRoute._addFileChildren(LocaleRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LocaleRoute: LocaleRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
