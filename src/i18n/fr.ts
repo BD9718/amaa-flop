@@ -19,7 +19,7 @@ export const fr = {
     back: "Retour",
     statusDone: "Réalisé",
     statusUpcoming: "À venir",
-    placeholder: "Contenu provisoire — en attente des données officielles AMAA.",
+    empty: "Aucun élément ne correspond à cette sélection.",
     share: "Partager",
     close: "Fermer",
   },
@@ -27,12 +27,12 @@ export const fr = {
     heroKicker: "Association Mauritanienne pour l'Assainissement",
     heroTitle: "L’assainissement, une priorité majeure pour la Mauritanie.",
     heroText:
-      "L’AMAA œuvre en Mauritanie en faveur de l’assainissement, de la santé publique et de la protection de l’environnement, aux côtés des institutions, des collectivités et de ses partenaires opérationnels",
+      "L’AMAA œuvre en Mauritanie en faveur de l’assainissement, de la santé publique et de la protection de l’environnement, aux côtés des institutions, des collectivités et de ses partenaires opérationnels.",
     heroCta: "Découvrir nos projets",
     heroCta2: "Devenir partenaire",
     introTitle: "Qui sommes-nous",
     introText:
-      "[Texte provisoire] Créée par des professionnels de la santé et de l'en",
+      "L'AMAA est une association mauritanienne créée par des professionnels de la santé et de l'environnement. Elle accompagne les acteurs publics et privés dans la gestion des boues de vidange, informe les populations sur les risques sanitaires et renforce les compétences des travailleurs de l'assainissement.",
     figuresTitle: "Notre impact en chiffres",
     figures: [
       { value: "12 000+", label: "Personnes sensibilisées" },
@@ -49,37 +49,38 @@ export const fr = {
     partnersTitle: "Ils nous accompagnent",
     ctaTitle: "Construisons ensemble un assainissement durable",
     ctaText:
-      "[Texte provisoire] Institutions, bailleurs, collectivités : contactez-nous pour étudier un partenariat.",
+      "Institutions, bailleurs et collectivités : nos équipes sont disponibles pour étudier avec vous un partenariat technique ou financier.",
     ctaButton: "Nous contacter",
   },
   about: {
     title: "L'Association",
-    lead: "[Texte provisoire] Une organisation mauritanienne indépendante, dédiée à l'assainissement et à la santé des populations.",
+    lead: "Une organisation mauritanienne indépendante, dédiée à l'assainissement et à la santé des populations.",
     historyTitle: "Notre histoire",
     historyText:
-      "[Texte provisoire] Fondée à Nouakchott, l'AMAA est née du constat que les travailleurs de l'assainissement exercent sans protection sanitaire suffisante. Depuis, l'association a élargi son action à la sensibilisation communautaire et à la formation professionnelle.",
+      "L'AMAA est née à Nouakchott du constat que les travailleurs de l'assainissement exercent un métier essentiel sans protection sanitaire suffisante. Réunis autour de ce diagnostic, des professionnels de la santé publique et de l'environnement ont structuré une action de terrain, puis élargi leur intervention à la sensibilisation communautaire, à la formation professionnelle et à la protection des ressources en eau.",
     missionTitle: "Notre mission",
     missionText:
-      "[Texte provisoire] Promouvoir un assainissement sûr et inclusif, protéger la santé des travailleurs et des habitants, et appuyer les politiques publiques par des données de terrain fiables.",
+      "Promouvoir un assainissement sûr et inclusif, protéger la santé des travailleurs et des habitants, et appuyer les politiques publiques par des données de terrain fiables. Chaque intervention est conçue avec les autorités sanitaires et municipales, puis documentée et évaluée.",
     valuesTitle: "Nos valeurs",
     values: [
-      { title: "Rigueur", text: "[Provisoire] Des interventions documentées et évaluées." },
-      { title: "Dignité", text: "[Provisoire] Le respect des travailleurs de l'assainissement." },
-      { title: "Transparence", text: "[Provisoire] Une gestion claire et redevable." },
-      { title: "Partenariat", text: "[Provisoire] Agir avec les institutions et les communautés." },
+      { title: "Rigueur", text: "Des interventions préparées, documentées et évaluées avec méthode." },
+      { title: "Dignité", text: "Le respect du travail et de la santé des agents de l'assainissement." },
+      { title: "Transparence", text: "Une gestion claire, redevable devant nos partenaires et le public." },
+      { title: "Partenariat", text: "Agir avec les institutions, les communes et les communautés." },
     ],
-    teamTitle: "Notre équipe",
-    teamNote: "[Provisoire] Photos et biographies à fournir par l'AMAA.",
+    teamTitle: "Notre organisation",
+    teamNote:
+      "L'association est animée par des bénévoles et des professionnels de la santé, de l'environnement et de l'ingénierie sanitaire, répartis en quatre pôles de responsabilité.",
     team: [
-      { name: "Nom Prénom", role: "Président" },
-      { name: "Nom Prénom", role: "Secrétaire général" },
-      { name: "Nom Prénom", role: "Coordinatrice des projets" },
-      { name: "Nom Prénom", role: "Responsable formation" },
+      { name: "Bureau exécutif", role: "Présidence, orientation stratégique et représentation" },
+      { name: "Secrétariat général", role: "Administration, partenariats et suivi des conventions" },
+      { name: "Pôle projets", role: "Conception, mise en œuvre et évaluation des interventions" },
+      { name: "Pôle formation", role: "Modules de sécurité au travail et éducation à l'hygiène" },
     ],
   },
   actions: {
     title: "Nos Actions",
-    lead: "[Texte provisoire] Trois programmes structurants, conduits avec les autorités sanitaires et municipales.",
+    lead: "Trois programmes structurants, conduits avec les autorités sanitaires et municipales.",
     objectives: "Objectifs",
     methods: "Méthodes",
     impact: "Impact attendu",
@@ -87,44 +88,44 @@ export const fr = {
       {
         slug: "assainissement",
         title: "Assainissement",
-        text: "[Provisoire] Gestion des boues de vidange, équipements de protection et amélioration des sites de dépotage.",
+        text: "Gestion des boues de vidange, équipements de protection des agents et amélioration des sites de dépotage.",
         objectives: [
           "Sécuriser la chaîne de vidange",
           "Réduire les rejets non contrôlés",
           "Appuyer les sites de traitement",
         ],
         methods: ["Diagnostic de terrain", "Appui matériel", "Suivi et évaluation"],
-        impact: "[Provisoire] Réduction mesurable des risques sanitaires en milieu urbain.",
+        impact: "Une réduction mesurable des risques sanitaires liés aux eaux usées en milieu urbain.",
       },
       {
         slug: "sensibilisation",
         title: "Sensibilisation",
-        text: "[Provisoire] Campagnes communautaires sur l'hygiène, l'eau potable et la gestion des déchets.",
+        text: "Campagnes communautaires sur l'hygiène, l'eau potable et la gestion des déchets solides.",
         objectives: [
           "Informer les ménages",
           "Mobiliser les relais communautaires",
           "Impliquer les écoles",
         ],
         methods: ["Causeries de quartier", "Radios locales", "Supports trilingues"],
-        impact: "[Provisoire] Adoption durable de pratiques d'hygiène.",
+        impact: "L'adoption durable de pratiques d'hygiène par les familles et les établissements scolaires.",
       },
       {
         slug: "formation",
         title: "Formation",
-        text: "[Provisoire] Renforcement des compétences des vidangeurs, agents municipaux et animateurs.",
+        text: "Renforcement des compétences des vidangeurs, des agents municipaux et des animateurs communautaires.",
         objectives: [
           "Professionnaliser les métiers",
           "Prévenir les accidents",
           "Certifier les acquis",
         ],
         methods: ["Modules pratiques", "Formation de formateurs", "Kits pédagogiques"],
-        impact: "[Provisoire] Des équipes qualifiées et mieux protégées.",
+        impact: "Des équipes qualifiées, mieux équipées et mieux protégées sur le terrain.",
       },
     ],
   },
   projects: {
     title: "Nos Projets",
-    lead: "[Texte provisoire] Projets réalisés et projets à venir, avec leurs objectifs et résultats.",
+    lead: "Projets réalisés et projets à venir, avec leurs objectifs, leurs bénéficiaires et leurs résultats.",
     doneTitle: "Projets réalisés",
     upcomingTitle: "Projets à venir",
     fields: {
@@ -144,27 +145,29 @@ export const fr = {
   },
   news: {
     title: "Actualités",
-    lead: "[Texte provisoire] Communiqués, comptes rendus de terrain et annonces institutionnelles.",
+    lead: "Communiqués, comptes rendus de terrain et annonces institutionnelles de l'association.",
     filterCategory: "Catégorie",
     backToList: "Toutes les actualités",
     published: "Publié le",
   },
   gallery: {
     title: "Galerie",
-    lead: "[Texte provisoire] Photographies de terrain — légendes à compléter par l'AMAA.",
+    lead: "Photographies de nos interventions d'assainissement, de sensibilisation et de protection de l'environnement.",
   },
   partners: {
     title: "Partenaires",
-    lead: "[Texte provisoire] Institutions, bailleurs et organisations qui soutiennent nos actions.",
+    lead: "Institutions, bailleurs et organisations qui accompagnent nos actions sur le terrain.",
+    note:
+      "Votre institution souhaite soutenir une intervention ou co-construire un projet d'assainissement ? Écrivez-nous : nous étudions chaque demande de partenariat.",
   },
   contact: {
     title: "Contact",
-    lead: "[Texte provisoire] Notre équipe répond aux demandes des institutions, partenaires et journalistes.",
+    lead: "Notre équipe répond aux demandes des institutions, des partenaires, des donateurs et des journalistes.",
     phone: "Téléphone",
     email: "E-mail",
     whatsapp: "WhatsApp",
     address: "Adresse",
-    addressValue: "[Provisoire] Avenue ..., Nouakchott, Mauritanie",
+    addressValue: "Nouakchott, Mauritanie",
     formTitle: "Écrivez-nous",
     form: {
       name: "Nom complet",
@@ -172,8 +175,8 @@ export const fr = {
       subject: "Objet",
       message: "Message",
       send: "Envoyer le message",
-      sending: "Envoi...",
-      success: "Merci, votre message a bien été enregistré. Nous vous répondrons rapidement.",
+      sending: "Envoi en cours...",
+      success: "Merci, votre message a bien été transmis. Notre équipe vous répondra dans les meilleurs délais.",
       errName: "Veuillez indiquer votre nom (2 caractères minimum).",
       errEmail: "Veuillez indiquer une adresse e-mail valide.",
       errSubject: "Veuillez indiquer un objet (3 caractères minimum).",
@@ -183,10 +186,11 @@ export const fr = {
   footer: {
     tagline: "Association Mauritanienne pour l'Assainissement",
     about:
-      "[Provisoire] Assainissement, santé publique et environnement en Mauritanie depuis [année].",
+      "Association mauritanienne engagée pour l'assainissement, la santé publique et la protection de l'environnement.",
     quickLinks: "Navigation",
     contactTitle: "Nous joindre",
     rights: "Tous droits réservés.",
+    legal: "Association à but non lucratif — Nouakchott, Mauritanie",
   },
   meta: {
     home: {
@@ -196,7 +200,7 @@ export const fr = {
     },
     about: {
       title: "L'Association — AMAA",
-      description: "Histoire, mission, valeurs et équipe de l'AMAA en Mauritanie.",
+      description: "Histoire, mission, valeurs et organisation de l'AMAA en Mauritanie.",
     },
     actions: {
       title: "Nos Actions — AMAA",
@@ -204,7 +208,7 @@ export const fr = {
     },
     projects: {
       title: "Nos Projets — AMAA",
-      description: "Projets réalisés et à venir de l'AMAA en matière d'assainissement et de santé.",
+      description: "Projets réalisés et à venir de l'AMAA en matière d'assainissement et de santé publique.",
     },
     news: {
       title: "Actualités — AMAA",
