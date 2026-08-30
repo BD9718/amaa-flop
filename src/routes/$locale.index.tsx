@@ -87,27 +87,6 @@ function HomePage() {
         />
       </section>
 
-      {/* Figures */}
-      <section className="border-y border-border bg-secondary/50 py-16">
-        <div className="container-page">
-          <h2 className="text-center text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-            {t.home.figuresTitle}
-          </h2>
-          <dl className="mt-10 grid grid-cols-2 gap-8 md:grid-cols-4">
-            {t.home.figures.map((f) => (
-              <div key={f.label} className="text-center">
-                <dt className="sr-only">{f.label}</dt>
-                <dd>
-                  <span className="block font-display text-4xl font-semibold text-primary md:text-5xl">
-                    {f.value}
-                  </span>
-                  <span className="mt-2 block text-sm text-muted-foreground">{f.label}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </section>
 
       {/* Actions */}
       <section className="container-page py-20">
