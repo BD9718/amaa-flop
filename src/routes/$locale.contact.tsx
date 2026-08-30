@@ -94,7 +94,7 @@ function ContactPage() {
             <span>
               <span className="block text-sm font-semibold">{t.contact.whatsapp}</span>
               <span className="mt-0.5 block text-sm text-muted-foreground" dir="ltr">
-                +{contactInfo.whatsapp}
+                {contactInfo.whatsappDisplay}
               </span>
             </span>
           </a>

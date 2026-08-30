@@ -562,6 +562,7 @@ export const contactInfo = {
   phone: "+222 42 99 99 71\n+222 22 37 74 47",
   email: "dramegawa1@gmail.com\nmariemdra@gmail.com",
   whatsapp: "22245251234",
+  whatsappDisplay: "+222 42999971 / +222 22377447",
 };
 
 export function t(value: L10n | string[] | Record<Locale, string[]>, locale: Locale) {
