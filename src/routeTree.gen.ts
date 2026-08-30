@@ -14,6 +14,7 @@ import { Route as LocaleRouteImport } from './routes/$locale'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
+import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
 import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
 import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index'
@@ -44,6 +45,11 @@ const LocaleAboutRoute = LocaleAboutRouteImport.update({
 const LocaleActionsRoute = LocaleActionsRouteImport.update({
   id: '/actions',
   path: '/actions',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleContactRoute = LocaleContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => LocaleRoute,
 } as any)
 const LocaleGalleryRoute = LocaleGalleryRouteImport.update({
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale': typeof LocaleIndexRoute
@@ -108,6 +116,7 @@ export interface FileRoutesById {
   '/$locale': typeof LocaleRouteWithChildren
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
   '/$locale/': typeof LocaleIndexRoute
@@ -123,6 +132,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
     | '/$locale/'
@@ -135,6 +145,7 @@ export interface FileRouteTypes {
     | '/'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
     | '/$locale'
@@ -148,6 +159,7 @@ export interface FileRouteTypes {
     | '/$locale'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
     | '/$locale/'
@@ -199,6 +211,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleActionsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/contact': {
+      id: '/$locale/contact'
+      path: '/contact'
+      fullPath: '/$locale/contact'
+      preLoaderRoute: typeof LocaleContactRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/gallery': {
       id: '/$locale/gallery'
       path: '/gallery'
@@ -247,6 +266,7 @@ declare module '@tanstack/react-router' {
 interface LocaleRouteChildren {
   LocaleAboutRoute: typeof LocaleAboutRoute
   LocaleActionsRoute: typeof LocaleActionsRoute
+  LocaleContactRoute: typeof LocaleContactRoute
   LocaleGalleryRoute: typeof LocaleGalleryRoute
   LocalePartnersRoute: typeof LocalePartnersRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
@@ -259,6 +279,7 @@ interface LocaleRouteChildren {
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleAboutRoute: LocaleAboutRoute,
   LocaleActionsRoute: LocaleActionsRoute,
+  LocaleContactRoute: LocaleContactRoute,
   LocaleGalleryRoute: LocaleGalleryRoute,
   LocalePartnersRoute: LocalePartnersRoute,
   LocaleIndexRoute: LocaleIndexRoute,
