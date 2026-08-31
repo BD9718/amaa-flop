@@ -651,10 +651,13 @@ export const partners: { name: L10n; type: L10n }[] = [
 ];
 
 export const contactInfo = {
-  phone: "+222 42 99 99 71\n+222 22 37 74 47",
+  phone: "+222 42 99 99 71 / +222 22 37 74 47",
+  phonePrimary: "+22242999971",
   email: "dramegawa1@gmail.com / mariemdra@gmail.com",
-  whatsapp: "22245251234",
-  whatsappDisplay: "+222 42999971 / +222 22377447",
+  whatsapp: "22242999971",
+  whatsappDisplay: "+222 42 99 99 71",
+  whatsappSecondary: "22223774447",
+  whatsappSecondaryDisplay: "+222 22 37 74 47",
 };
 
 export function t(value: L10n | string[] | Record<Locale, string[]>, locale: Locale) {
