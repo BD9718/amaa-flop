@@ -76,7 +76,7 @@ function ContactPage() {
       <section className="container-page grid gap-12 py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.4fr)]">
         <div className="space-y-4">
           <a
-            href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+            href={`tel:${contactInfo.phonePrimary}`}
             className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft transition-colors hover:border-primary"
           >
             <Phone className="mt-0.5 size-5 text-primary" aria-hidden="true" />
@@ -99,20 +99,32 @@ function ContactPage() {
               </span>
             </span>
           </a>
-          <a
-            href={`https://wa.me/${contactInfo.whatsapp}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft transition-colors hover:border-primary"
-          >
+          <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft">
             <MessageCircle className="mt-0.5 size-5 text-primary" aria-hidden="true" />
             <span>
               <span className="block text-sm font-semibold">{t.contact.whatsapp}</span>
-              <span className="mt-0.5 block text-sm text-muted-foreground" dir="ltr">
-                {contactInfo.whatsappDisplay}
+              <span className="mt-1 flex flex-col gap-1 text-sm">
+                <a
+                  href={`https://wa.me/${contactInfo.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary"
+                  dir="ltr"
+                >
+                  {contactInfo.whatsappDisplay}
+                </a>
+                <a
+                  href={`https://wa.me/${contactInfo.whatsappSecondary}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary"
+                  dir="ltr"
+                >
+                  {contactInfo.whatsappSecondaryDisplay}
+                </a>
               </span>
             </span>
-          </a>
+          </div>
           <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft">
             <MapPin className="mt-0.5 size-5 text-primary" aria-hidden="true" />
             <span>
