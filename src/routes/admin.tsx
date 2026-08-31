@@ -42,7 +42,7 @@ function AdminLayout() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const fetchMe = useServerFn(getAdminMeFn);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isFetching, isError } = useQuery({
     queryKey: ["admin-me"],
     queryFn: async () => {
       const {
