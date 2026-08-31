@@ -2,7 +2,6 @@
 // All functions run with the caller's session (RLS enforced as the user),
 // after an explicit admin-role verification.
 import type { SupabaseClient } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
 
 export type L10n = { fr: string; ar: string; en: string };
 export type L10nList = { fr: string[]; ar: string[]; en: string[] };
@@ -72,7 +71,7 @@ export type MessageRow = {
   created_at: string;
 };
 
-export type AdminContext = { supabase: SupabaseClient<Database>; userId: string };
+export type AdminContext = { supabase: SupabaseClient; userId: string };
 
 export async function requireAdmin(ctx: AdminContext) {
   const { data, error } = await ctx.supabase.rpc("has_role", {

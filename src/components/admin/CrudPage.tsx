@@ -32,7 +32,7 @@ export function CrudPage<T extends Record<string, unknown>>({
 
   const { data: rows, isLoading } = useQuery({
     queryKey: ["admin", table],
-    queryFn: () => list({ data: { table } }) as Promise<T[]>,
+    queryFn: () => list({ data: { table } }) as unknown as Promise<T[]>,
   });
 
   const saveMutation = useMutation({
