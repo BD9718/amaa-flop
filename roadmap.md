@@ -10,6 +10,6 @@
 - [x] Pages publiques alimentées par la base (accueil, projets, actualités, galerie, partenaires)
 
 # Suite
-- [ ] Corriger les problèmes SEO (métadonnées dupliquées, og:type article, sitemap)
-- [ ] Activer l'IA (Lovable AI) pour le projet
-- [ ] Ajouter les intégrations agents (serveur MCP)
+- [x] Corriger les problèmes SEO (métadonnées dupliquées, og:type article, sitemap)
+- [x] Activer l'IA (Lovable AI) pour le projet
+- [x] Ajouter les intégrations agents (serveur MCP protégé par OAuth)
