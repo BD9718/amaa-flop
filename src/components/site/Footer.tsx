@@ -57,9 +57,14 @@ export function Footer({ locale }: { locale: Locale }) {
             </li>
             <li className="flex items-start gap-2">
               <Mail className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
-              <a href={`mailto:${contactInfo.email}`} className="hover:text-primary" dir="ltr">
-                {contactInfo.email}
-              </a>
+              <span className="flex flex-col gap-0.5" dir="ltr">
+                <a href={`mailto:${contactInfo.emailPrimary}`} className="hover:text-primary">
+                  {contactInfo.emailPrimary}
+                </a>
+                <a href={`mailto:${contactInfo.emailSecondary}`} className="hover:text-primary">
+                  {contactInfo.emailSecondary}
+                </a>
+              </span>
             </li>
             <li className="flex items-start gap-2">
               <MapPin className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />

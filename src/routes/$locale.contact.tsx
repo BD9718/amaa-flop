@@ -87,18 +87,28 @@ function ContactPage() {
               </span>
             </span>
           </a>
-          <a
-            href={`mailto:${contactInfo.email}`}
-            className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft transition-colors hover:border-primary"
-          >
+          <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft">
             <Mail className="mt-0.5 size-5 text-primary" aria-hidden="true" />
             <span>
               <span className="block text-sm font-semibold">{t.contact.email}</span>
-              <span className="mt-0.5 block text-sm text-muted-foreground" dir="ltr">
-                {contactInfo.email}
+              <span className="mt-1 flex flex-col gap-1 text-sm">
+                <a
+                  href={`mailto:${contactInfo.emailPrimary}`}
+                  className="text-muted-foreground hover:text-primary"
+                  dir="ltr"
+                >
+                  {contactInfo.emailPrimary}
+                </a>
+                <a
+                  href={`mailto:${contactInfo.emailSecondary}`}
+                  className="text-muted-foreground hover:text-primary"
+                  dir="ltr"
+                >
+                  {contactInfo.emailSecondary}
+                </a>
               </span>
             </span>
-          </a>
+          </div>
           <div className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-soft">
             <MessageCircle className="mt-0.5 size-5 text-primary" aria-hidden="true" />
             <span>
