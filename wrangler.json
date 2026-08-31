@@ -1,6 +1,14 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "amaa-connect-hub",
+  "main": "dist/server/index.mjs",
+  "build": {
+    "command": "bun run build"
+  },
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  },
   "compatibility_flags": ["nodejs_compat"],
   "compatibility_date": "2026-08-31",
   "observability": {
