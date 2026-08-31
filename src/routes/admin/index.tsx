@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { FolderKanban, Hash, Image, Mail, Newspaper, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { getOverviewFn } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin/")({
