@@ -4,37 +4,41 @@ Le build de production (`bun run build`) génère un Worker Cloudflare complet d
 `dist/` : `dist/server/index.mjs` (SSR + fonctions serveur) et `dist/client/`
 (assets statiques servis via le binding `ASSETS`).
 
-## Prérequis
+**Tout est déjà configuré.** Les variables non sensibles (`SUPABASE_URL`,
+`SUPABASE_PUBLISHABLE_KEY`) sont incluses dans `wrangler.json` — aucune autre
+variable n'est nécessaire (l'admin passe par la session utilisateur, aucune clé
+secrète côté serveur).
 
-1. Un compte Cloudflare avec Workers activé.
-2. Authentification locale :
+## Option A — Déploiement automatique (recommandé, zéro commande)
 
-   ```bash
-   bunx wrangler login
-   ```
+Un workflow GitHub Actions est prêt dans `.github/workflows/deploy.yml` :
+chaque push sur `main` (ou chaque modification Lovable synchronisée) déploie
+automatiquement le Worker.
 
-## Variables d'environnement
+Activation en 3 étapes, une seule fois :
 
-Le Worker a besoin des mêmes variables que l'application. Déclarez-les une fois :
+1. Créez un token API Cloudflare : dash.cloudflare.com → **My Profile →
+   API Tokens → Create Token** → modèle **Edit Cloudflare Workers** →
+   portée « votre compte ».
+2. Dans le dépôt GitHub du projet → **Settings → Secrets and variables →
+   Actions → New repository secret**, ajoutez :
+   - `CLOUDFLARE_API_TOKEN` = le token créé à l'étape 1
+   - `CLOUDFLARE_ACCOUNT_ID` = votre Account ID (visible en bas à droite du
+     dashboard Cloudflare, page Workers)
+3. C'est tout : le prochain push déploie sur
+   `https://amaa-connect-hub.<votre-compte>.workers.dev`. Vous pouvez aussi
+   lancer manuellement via **Actions → Deploy to Cloudflare Workers → Run
+   workflow**.
+
+## Option B — Déploiement manuel depuis votre machine
 
 ```bash
-# Variables non sensibles
-bunx wrangler secret put SUPABASE_URL
-bunx wrangler secret put SUPABASE_PUBLISHABLE_KEY
-
-# Clés sensibles (obligatoires pour l'admin et le serveur MCP)
-bunx wrangler secret put SUPABASE_SERVICE_ROLE_KEY
-bunx wrangler secret put LOVABLE_API_KEY
-```
-
-Pour un test local (`bun run preview:worker`), copiez `.env` vers `.dev.vars`
-à la racine du projet (jamais commité).
-
-## Déployer
-
-```bash
+bunx wrangler login
 bun run deploy
 ```
+
+Pour un test local du Worker avant déploiement : `bun run preview:worker`
+(copiez d'abord `.env` vers `.dev.vars` à la racine, jamais commité).
 
 Cette commande reconstruit le site puis publie le Worker sous le nom
 `amaa-connect-hub` (défini dans `wrangler.json`). Les flags

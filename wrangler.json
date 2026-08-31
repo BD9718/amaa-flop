@@ -5,5 +5,9 @@
   "compatibility_date": "2026-08-31",
   "observability": {
     "enabled": true
+  },
+  "vars": {
+    "SUPABASE_URL": "https://gfhbytrfrwzkhfbsiptw.supabase.co",
+    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_yvqYc_SeYk7dQs-BdLBxGQ_c4dQ3OFt"
   }
 }
