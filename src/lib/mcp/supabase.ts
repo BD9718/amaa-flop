@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import type { ToolContext } from "@lovable.dev/mcp-js";
+import { supabasePublishableKey as envPublishableKey, supabaseUrl as envSupabaseUrl } from "@/lib/env";
 
 type RuntimeGlobals = typeof globalThis & {
   Deno?: { env?: { get?: (name: string) => string | undefined } };
@@ -20,9 +21,7 @@ function configuredEnv(names: readonly string[]): string | undefined {
 }
 
 function supabaseProjectUrl(): string {
-  const url = configuredEnv(["SUPABASE_URL", "VITE_SUPABASE_URL"]);
-  if (!url) throw new Error("SUPABASE_URL (or VITE_SUPABASE_URL) is required");
-  return url;
+  return envSupabaseUrl();
 }
 
 function supabasePublishableKey(): string {
@@ -45,7 +44,7 @@ function supabasePublishableKey(): string {
   }
   const legacy = configuredEnv(["SUPABASE_ANON_KEY", "VITE_SUPABASE_ANON_KEY"]);
   if (legacy) return legacy;
-  throw new Error("SUPABASE_PUBLISHABLE_KEY, SUPABASE_PUBLISHABLE_KEYS, or SUPABASE_ANON_KEY is required");
+  return envPublishableKey();
 }
 
 /** Forwards the verified bearer token so RLS runs as the signed-in user. */

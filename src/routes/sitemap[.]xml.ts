@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
+import { supabasePublishableKey, supabaseUrl } from "@/lib/env";
 
 const BASE_URL = "https://amaa-connect-hub.lovable.app";
 const LOCALES = ["fr", "ar", "en"] as const;
@@ -12,9 +13,7 @@ interface SitemapEntry {
 }
 
 function makeClient() {
-  const key = process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["VITE_SUPABASE_PUBLISHABLE_KEY"]!;
-  const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"]!;
-  return { url, key };
+  return { url: supabaseUrl(), key: supabasePublishableKey() };
 }
 
 export const Route = createFileRoute("/sitemap.xml")({
