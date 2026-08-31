@@ -11,15 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LocaleRouteImport } from './routes/$locale'
+import { Route as ActualitesRouteImport } from './routes/actualites'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as ProjetsRouteImport } from './routes/projets'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale.index'
 import { Route as LocaleAboutRouteImport } from './routes/$locale.about'
 import { Route as LocaleActionsRouteImport } from './routes/$locale.actions'
+import { Route as LocaleActualitesRouteImport } from './routes/$locale.actualites'
 import { Route as LocaleContactRouteImport } from './routes/$locale.contact'
 import { Route as LocaleGalleryRouteImport } from './routes/$locale.gallery'
 import { Route as LocalePartnersRouteImport } from './routes/$locale.partners'
+import { Route as LocaleProjetsRouteImport } from './routes/$locale.projets'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
@@ -47,6 +51,11 @@ const LocaleRoute = LocaleRouteImport.update({
   path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActualitesRoute = ActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -55,6 +64,11 @@ const AdminRoute = AdminRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjetsRoute = ProjetsRouteImport.update({
+  id: '/projets',
+  path: '/projets',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -77,6 +91,11 @@ const LocaleActionsRoute = LocaleActionsRouteImport.update({
   path: '/actions',
   getParentRoute: () => LocaleRoute,
 } as any)
+const LocaleActualitesRoute = LocaleActualitesRouteImport.update({
+  id: '/actualites',
+  path: '/actualites',
+  getParentRoute: () => LocaleRoute,
+} as any)
 const LocaleContactRoute = LocaleContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -90,6 +109,11 @@ const LocaleGalleryRoute = LocaleGalleryRouteImport.update({
 const LocalePartnersRoute = LocalePartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
+  getParentRoute: () => LocaleRoute,
+} as any)
+const LocaleProjetsRoute = LocaleProjetsRouteImport.update({
+  id: '/projets',
+  path: '/projets',
   getParentRoute: () => LocaleRoute,
 } as any)
 const Char91DotmcpChar93ListToolsRoute =
@@ -179,14 +203,18 @@ const Char91DotmcpChar93InvokeToolToolRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/actualites': typeof ActualitesRoute
   '/admin': typeof AdminRouteWithChildren
   '/mcp': typeof McpRoute
+  '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/actualites': typeof LocaleActualitesRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale/projets': typeof LocaleProjetsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/actualites': typeof AdminActualitesRoute
@@ -207,13 +235,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/actualites': typeof ActualitesRoute
   '/mcp': typeof McpRoute
+  '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/actualites': typeof LocaleActualitesRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale/projets': typeof LocaleProjetsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/actualites': typeof AdminActualitesRoute
@@ -236,14 +268,18 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$locale': typeof LocaleRouteWithChildren
+  '/actualites': typeof ActualitesRoute
   '/admin': typeof AdminRouteWithChildren
   '/mcp': typeof McpRoute
+  '/projets': typeof ProjetsRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/about': typeof LocaleAboutRoute
   '/$locale/actions': typeof LocaleActionsRoute
+  '/$locale/actualites': typeof LocaleActualitesRoute
   '/$locale/contact': typeof LocaleContactRoute
   '/$locale/gallery': typeof LocaleGalleryRoute
   '/$locale/partners': typeof LocalePartnersRoute
+  '/$locale/projets': typeof LocaleProjetsRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/admin/actualites': typeof AdminActualitesRoute
@@ -267,14 +303,18 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$locale'
+    | '/actualites'
     | '/admin'
     | '/mcp'
+    | '/projets'
     | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/actualites'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/$locale/projets'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/actualites'
@@ -295,13 +335,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/actualites'
     | '/mcp'
+    | '/projets'
     | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/actualites'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/$locale/projets'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/actualites'
@@ -323,14 +367,18 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$locale'
+    | '/actualites'
     | '/admin'
     | '/mcp'
+    | '/projets'
     | '/sitemap.xml'
     | '/$locale/about'
     | '/$locale/actions'
+    | '/$locale/actualites'
     | '/$locale/contact'
     | '/$locale/gallery'
     | '/$locale/partners'
+    | '/$locale/projets'
     | '/.mcp/list-tools'
     | '/.well-known/oauth-protected-resource'
     | '/admin/actualites'
@@ -353,8 +401,10 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LocaleRoute: typeof LocaleRouteWithChildren
+  ActualitesRoute: typeof ActualitesRoute
   AdminRoute: typeof AdminRouteWithChildren
   McpRoute: typeof McpRoute
+  ProjetsRoute: typeof ProjetsRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
@@ -378,6 +428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/actualites': {
+      id: '/actualites'
+      path: '/actualites'
+      fullPath: '/actualites'
+      preLoaderRoute: typeof ActualitesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin': {
       id: '/admin'
       path: '/admin'
@@ -390,6 +447,13 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projets': {
+      id: '/projets'
+      path: '/projets'
+      fullPath: '/projets'
+      preLoaderRoute: typeof ProjetsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -420,6 +484,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleActionsRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/$locale/actualites': {
+      id: '/$locale/actualites'
+      path: '/actualites'
+      fullPath: '/$locale/actualites'
+      preLoaderRoute: typeof LocaleActualitesRouteImport
+      parentRoute: typeof LocaleRoute
+    }
     '/$locale/contact': {
       id: '/$locale/contact'
       path: '/contact'
@@ -439,6 +510,13 @@ declare module '@tanstack/react-router' {
       path: '/partners'
       fullPath: '/$locale/partners'
       preLoaderRoute: typeof LocalePartnersRouteImport
+      parentRoute: typeof LocaleRoute
+    }
+    '/$locale/projets': {
+      id: '/$locale/projets'
+      path: '/projets'
+      fullPath: '/$locale/projets'
+      preLoaderRoute: typeof LocaleProjetsRouteImport
       parentRoute: typeof LocaleRoute
     }
     '/.mcp/list-tools': {
@@ -559,9 +637,11 @@ declare module '@tanstack/react-router' {
 interface LocaleRouteChildren {
   LocaleAboutRoute: typeof LocaleAboutRoute
   LocaleActionsRoute: typeof LocaleActionsRoute
+  LocaleActualitesRoute: typeof LocaleActualitesRoute
   LocaleContactRoute: typeof LocaleContactRoute
   LocaleGalleryRoute: typeof LocaleGalleryRoute
   LocalePartnersRoute: typeof LocalePartnersRoute
+  LocaleProjetsRoute: typeof LocaleProjetsRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
   LocaleNewsSlugRoute: typeof LocaleNewsSlugRoute
   LocaleProjectsSlugRoute: typeof LocaleProjectsSlugRoute
@@ -572,9 +652,11 @@ interface LocaleRouteChildren {
 const LocaleRouteChildren: LocaleRouteChildren = {
   LocaleAboutRoute: LocaleAboutRoute,
   LocaleActionsRoute: LocaleActionsRoute,
+  LocaleActualitesRoute: LocaleActualitesRoute,
   LocaleContactRoute: LocaleContactRoute,
   LocaleGalleryRoute: LocaleGalleryRoute,
   LocalePartnersRoute: LocalePartnersRoute,
+  LocaleProjetsRoute: LocaleProjetsRoute,
   LocaleIndexRoute: LocaleIndexRoute,
   LocaleNewsSlugRoute: LocaleNewsSlugRoute,
   LocaleProjectsSlugRoute: LocaleProjectsSlugRoute,
@@ -612,8 +694,10 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LocaleRoute: LocaleRouteWithChildren,
+  ActualitesRoute: ActualitesRoute,
   AdminRoute: AdminRouteWithChildren,
   McpRoute: McpRoute,
+  ProjetsRoute: ProjetsRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
   Char91DotwellKnownChar93OauthProtectedResourceRoute:
