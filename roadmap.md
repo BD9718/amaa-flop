@@ -7,4 +7,4 @@
 - [x] Dashboard admin (vue d'ensemble + messages de contact)
 - [x] CRUD projets / actualités / galerie / partenaires / chiffres clés
 - [x] Upload d'images (stockage media)
-- [ ] Pages publiques alimentées par la base
+- [x] Pages publiques alimentées par la base (accueil, projets, actualités, galerie, partenaires)
