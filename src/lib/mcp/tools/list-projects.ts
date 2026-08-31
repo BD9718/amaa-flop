@@ -8,7 +8,7 @@ export default defineTool({
   description: "Liste les projets de l'AMAA (slug, statut, titres trilingues, lieu, période).",
   inputSchema: {
     limit: z.number().int().min(1).max(100).default(20).describe("Nombre maximum de projets."),
-    status: z.enum(["completed", "upcoming"]).optional().describe("Filtrer par statut."),
+    status: z.enum(["done", "upcoming"]).optional().describe("Filtrer par statut."),
   },
   outputSchema: { projects: z.array(z.any()) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },

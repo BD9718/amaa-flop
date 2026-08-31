@@ -18,8 +18,8 @@ export default defineTool({
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase
       .from("news")
-      .select("slug,date,category,is_published,title,excerpt")
-      .order("date", { ascending: false })
+      .select("slug,published_on,category,is_published,title,excerpt")
+      .order("published_on", { ascending: false })
       .limit(limit ?? 20);
     if (error) return { content: [{ type: "text", text: error.message }], isError: true };
     return {

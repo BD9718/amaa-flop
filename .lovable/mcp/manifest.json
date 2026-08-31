@@ -40,7 +40,7 @@
               "description": "Filtrer par statut.",
               "type": "string",
               "enum": [
-                "completed",
+                "done",
                 "upcoming"
               ]
             }

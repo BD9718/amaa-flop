@@ -66,7 +66,7 @@ export type MessageRow = {
   email: string;
   subject: string;
   message: string;
-  read: boolean;
+  is_read: boolean;
   created_at: string;
 };
 
@@ -109,7 +109,7 @@ export async function getOverview(ctx: Ctx) {
   const { count: unread } = await ctx.supabase
     .from("contact_messages")
     .select("*", { count: "exact", head: true })
-    .eq("read", false);
+    .eq("is_read", false);
   return { projects, news, gallery, partners, figures, unreadMessages: unread ?? 0 };
 }
 
@@ -143,7 +143,10 @@ export async function listMessages(ctx: Ctx) {
 }
 
 export async function setMessageRead(ctx: Ctx, id: string, read: boolean) {
-  const { error } = await ctx.supabase.from("contact_messages").update({ read }).eq("id", id);
+  const { error } = await ctx.supabase
+    .from("contact_messages")
+    .update({ is_read: read })
+    .eq("id", id);
   if (error) throw new Error(error.message);
   return { ok: true };
 }
