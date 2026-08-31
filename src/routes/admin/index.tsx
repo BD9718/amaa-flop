@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery } from "@tanstack/react-query";
 import { FolderKanban, Hash, Image, Mail, Newspaper, Users } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import { getOverviewFn } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin/")({
@@ -12,8 +13,17 @@ function AdminDashboard() {
   const fetchOverview = useServerFn(getOverviewFn);
   const { data, isLoading } = useQuery({
     queryKey: ["admin", "overview"],
-    queryFn: () => fetchOverview(),
+    queryFn: async () => {
+      // The bearer token only exists client-side; skip the call without a session.
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session) return null;
+      return fetchOverview();
+    },
+    retry: false,
   });
+
 
   const cards = [
     { label: "Projets", value: data?.projects, to: "/admin/projets", icon: FolderKanban },
