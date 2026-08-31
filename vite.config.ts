@@ -9,6 +9,9 @@ import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/tanstack/vite";
 
 export default defineConfig({
   plugins: [mcpPlugin()],
+  // Vercel is the deploy target: Nitro emits the Build Output API layout in
+  // .vercel/output, which Vercel picks up with zero extra configuration.
+  nitro: { preset: "vercel" },
   tanstackStart: {
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
