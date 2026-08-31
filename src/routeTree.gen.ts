@@ -31,6 +31,7 @@ import { Route as LocaleNewsIndexRouteImport } from './routes/$locale.news.index
 import { Route as LocaleNewsSlugRouteImport } from './routes/$locale.news.$slug'
 import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projects.index'
 import { Route as LocaleProjectsSlugRouteImport } from './routes/$locale.projects.$slug'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -142,6 +143,11 @@ const LocaleProjectsSlugRoute = LocaleProjectsSlugRouteImport.update({
   path: '/projects/$slug',
   getParentRoute: () => LocaleRoute,
 } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -164,6 +170,7 @@ export interface FileRoutesByFullPath {
   '/admin/': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
@@ -186,6 +193,7 @@ export interface FileRoutesByTo {
   '/admin': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/$locale/news': typeof LocaleNewsIndexRoute
   '/$locale/projects': typeof LocaleProjectsIndexRoute
 }
@@ -211,6 +219,7 @@ export interface FileRoutesById {
   '/admin/': typeof AdminIndexRoute
   '/$locale/news/$slug': typeof LocaleNewsSlugRoute
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
@@ -237,6 +246,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
+    | '/.lovable/oauth/consent'
     | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -259,6 +269,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
+    | '/.lovable/oauth/consent'
     | '/$locale/news'
     | '/$locale/projects'
   id:
@@ -283,6 +294,7 @@ export interface FileRouteTypes {
     | '/admin/'
     | '/$locale/news/$slug'
     | '/$locale/projects/$slug'
+    | '/.lovable/oauth/consent'
     | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesById: FileRoutesById
@@ -292,6 +304,7 @@ export interface RootRouteChildren {
   LocaleRoute: typeof LocaleRouteWithChildren
   AdminRoute: typeof AdminRouteWithChildren
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -450,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleProjectsSlugRouteImport
       parentRoute: typeof LocaleRoute
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -511,6 +531,7 @@ const rootRouteChildren: RootRouteChildren = {
   LocaleRoute: LocaleRouteWithChildren,
   AdminRoute: AdminRouteWithChildren,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
