@@ -1,12 +1,13 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { news, newsCategories } from "@/content/data";
+import { newsCategories } from "@/content/data";
 import { getDict, normalizeLocale } from "@/i18n";
+import { newsArticleQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/news/$slug")({
-  loader: ({ params }) => {
-    const article = news.find((a) => a.slug === params.slug);
+  loader: async ({ params, context }) => {
+    const article = await context.queryClient.ensureQueryData(newsArticleQuery(params.slug));
     if (!article) throw notFound();
     return { article };
   },

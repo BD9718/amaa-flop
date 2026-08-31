@@ -1,12 +1,12 @@
 import { Link, createFileRoute, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
-import { projects } from "@/content/data";
 import { getDict, normalizeLocale } from "@/i18n";
+import { projectQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/projects/$slug")({
-  loader: ({ params }) => {
-    const project = projects.find((p) => p.slug === params.slug);
+  loader: async ({ params, context }) => {
+    const project = await context.queryClient.ensureQueryData(projectQuery(params.slug));
     if (!project) throw notFound();
     return { project };
   },

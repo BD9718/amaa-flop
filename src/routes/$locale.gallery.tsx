@@ -1,13 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { PageHeader } from "@/components/site/PageHeader";
-import { gallery, galleryCategories, type GalleryItem } from "@/content/data";
+import { galleryCategories, type GalleryItem } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale } from "@/i18n";
+import { galleryQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/gallery")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(galleryQuery()),
   head: ({ params }) => {
     const t = getDict(params.locale);
     return pageHead({
@@ -26,6 +29,7 @@ function GalleryPage() {
   const t = getDict(locale);
   const [category, setCategory] = useState<GalleryItem["category"] | "all">("all");
   const [index, setIndex] = useState<number | null>(null);
+  const { data: gallery } = useSuspenseQuery(galleryQuery());
 
   const items = gallery.filter((g) => category === "all" || g.category === category);
 
