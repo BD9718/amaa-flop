@@ -32,6 +32,9 @@ function AdminLoginPage() {
       setError("Identifiants incorrects ou compte inexistant.");
       return;
     }
+    // The layout caches a "signed-out" result while on /admin/login —
+    // invalidate it so the fresh session is evaluated after navigation.
+    await queryClient.invalidateQueries({ queryKey: ["admin-me"] });
     navigate({ to: "/admin" });
   }
 
