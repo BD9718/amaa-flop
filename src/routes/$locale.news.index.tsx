@@ -1,13 +1,16 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { PageHeader } from "@/components/site/PageHeader";
-import { news, newsCategories, type NewsArticle } from "@/content/data";
+import { newsCategories, type NewsArticle } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale } from "@/i18n";
+import { newsQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/news/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(newsQuery()),
   head: ({ params }) => {
     const t = getDict(params.locale);
     return pageHead({
@@ -25,6 +28,7 @@ function NewsPage() {
   const locale = normalizeLocale(Route.useParams().locale);
   const t = getDict(locale);
   const [category, setCategory] = useState<NewsArticle["category"] | "all">("all");
+  const { data: news } = useSuspenseQuery(newsQuery());
 
   const items = [...news]
     .filter((a) => category === "all" || a.category === category)

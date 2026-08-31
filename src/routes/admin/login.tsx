@@ -1,4 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/site/Logo";
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/admin/login")({
 
 function AdminLoginPage() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -30,6 +32,9 @@ function AdminLoginPage() {
       setError("Identifiants incorrects ou compte inexistant.");
       return;
     }
+    // The layout caches a "signed-out" result while on /admin/login —
+    // invalidate it so the fresh session is evaluated after navigation.
+    await queryClient.invalidateQueries({ queryKey: ["admin-me"] });
     navigate({ to: "/admin" });
   }
 

@@ -1,11 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { PageHeader } from "@/components/site/PageHeader";
-import { partners } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale } from "@/i18n";
+import { partnersQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/partners")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(partnersQuery()),
   head: ({ params }) => {
     const t = getDict(params.locale);
     return pageHead({
@@ -22,6 +24,7 @@ export const Route = createFileRoute("/$locale/partners")({
 function PartnersPage() {
   const locale = normalizeLocale(Route.useParams().locale);
   const t = getDict(locale);
+  const { data: partners } = useSuspenseQuery(partnersQuery());
 
   return (
     <>

@@ -1,12 +1,15 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, CalendarDays, MapPin } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
-import { projects, type Project } from "@/content/data";
+import { type Project } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale, type Locale } from "@/i18n";
+import { projectsQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/projects/")({
+  loader: ({ context }) => context.queryClient.ensureQueryData(projectsQuery()),
   head: ({ params }) => {
     const t = getDict(params.locale);
     return pageHead({
@@ -70,6 +73,7 @@ function ProjectCard({ project, locale }: { project: Project; locale: Locale }) 
 function ProjectsPage() {
   const locale = normalizeLocale(Route.useParams().locale);
   const t = getDict(locale);
+  const { data: projects } = useSuspenseQuery(projectsQuery());
   const done = projects.filter((p) => p.status === "done");
   const upcoming = projects.filter((p) => p.status === "upcoming");
 

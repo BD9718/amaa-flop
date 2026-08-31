@@ -1,12 +1,22 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight, Droplets, GraduationCap, Megaphone } from "lucide-react";
 import { SectionTitle } from "@/components/site/PageHeader";
-import { galleryCategories, gallery, news, partners, projects } from "@/content/data";
+import { galleryCategories } from "@/content/data";
 import { media } from "@/content/media";
 import { getDict, normalizeLocale } from "@/i18n";
+import { galleryQuery, newsQuery, partnersQuery, projectsQuery } from "@/lib/public.queries";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/$locale/")({
+  loader: async ({ context }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData(projectsQuery()),
+      context.queryClient.ensureQueryData(newsQuery()),
+      context.queryClient.ensureQueryData(galleryQuery()),
+      context.queryClient.ensureQueryData(partnersQuery()),
+    ]);
+  },
   head: ({ params }) => {
     const t = getDict(params.locale);
     return pageHead({
@@ -25,6 +35,10 @@ const actionIcons = [Droplets, Megaphone, GraduationCap];
 function HomePage() {
   const locale = normalizeLocale(Route.useParams().locale);
   const t = getDict(locale);
+  const { data: projects } = useSuspenseQuery(projectsQuery());
+  const { data: news } = useSuspenseQuery(newsQuery());
+  const { data: gallery } = useSuspenseQuery(galleryQuery());
+  const { data: partners } = useSuspenseQuery(partnersQuery());
   const featured = projects.slice(0, 3);
 
   return (
@@ -33,7 +47,7 @@ function HomePage() {
       <section className="relative isolate overflow-hidden bg-primary-dark text-primary-foreground">
         <img
           src={media.vidangeTruck}
-          alt={projects[0]!.coverAlt[locale]}
+          alt={projects[0]?.coverAlt[locale] ?? t.home.heroKicker}
           className="absolute inset-0 size-full object-cover opacity-35"
           loading="eager"
         />
@@ -81,7 +95,7 @@ function HomePage() {
         </div>
         <img
           src={media.cleanWater}
-          alt={gallery[1]!.caption[locale]}
+          alt={gallery[1]?.caption[locale] ?? t.home.introTitle}
           loading="lazy"
           className="aspect-4/3 w-full rounded-xl object-cover shadow-soft"
         />
@@ -157,7 +171,7 @@ function HomePage() {
       <section className="container-page py-20">
         <SectionTitle title={t.home.newsTitle} />
         <ul className="mt-10 grid gap-6 md:grid-cols-3">
-          {news.map((a) => (
+          {news.slice(0, 3).map((a) => (
             <li key={a.slug} className="rounded-xl border border-border bg-card p-6 shadow-soft">
               <time dateTime={a.date} className="text-xs font-semibold uppercase tracking-wider text-primary">
                 {new Intl.DateTimeFormat(locale === "ar" ? "ar-MR" : locale, {
@@ -183,7 +197,7 @@ function HomePage() {
       <section className="container-page pb-20">
         <SectionTitle title={t.home.galleryTitle} />
         <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
-          {gallery.map((g) => (
+          {gallery.slice(0, 8).map((g) => (
             <figure key={g.src + g.category} className="overflow-hidden rounded-lg border border-border">
               <img
                 src={g.src}
@@ -214,7 +228,7 @@ function HomePage() {
             {t.home.partnersTitle}
           </h2>
           <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
-            {partners.map((p) => (
+            {partners.slice(0, 6).map((p) => (
               <li
                 key={p.name.fr}
                 className="grid h-20 place-items-center rounded-lg border border-border bg-card px-3 text-center text-xs font-medium text-muted-foreground"
