@@ -32,7 +32,7 @@ export function CrudPage<T extends Record<string, unknown>>({
 
   const { data: rows, isLoading } = useQuery({
     queryKey: ["admin", table],
-    queryFn: () => list({ data: { table } }) as Promise<T[]>,
+    queryFn: () => list({ data: { table } }) as unknown as Promise<T[]>,
   });
 
   const saveMutation = useMutation({
@@ -42,7 +42,8 @@ export function CrudPage<T extends Record<string, unknown>>({
       setEditing(null);
       setFormError("");
     },
-    onError: (e) => setFormError(e instanceof Error ? e.message : "Erreur lors de l'enregistrement."),
+    onError: (e) =>
+      setFormError(e instanceof Error ? e.message : "Erreur lors de l'enregistrement."),
   });
 
   const deleteMutation = useMutation({
@@ -68,7 +69,10 @@ export function CrudPage<T extends Record<string, unknown>>({
         <div className="space-y-4 rounded-xl border border-border bg-card p-5">
           {renderForm(editing, setEditing)}
           {formError && (
-            <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+            <p
+              role="alert"
+              className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive"
+            >
               {formError}
             </p>
           )}

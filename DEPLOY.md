@@ -16,10 +16,9 @@ supplémentaire n'est nécessaire.
 4. Cliquez sur **Deploy**. Chaque push sur `main` redéploie automatiquement,
    et chaque branche/PR obtient une preview.
 
-Aucune variable d'environnement n'est requise : les identifiants publics du
-backend (URL + clé publiable) sont injectés au build, et l'espace admin
-s'authentifie via la session de l'utilisateur (aucune clé secrète côté
-serveur).
+Les identifiants publics du backend sont déclarés dans `vercel.json` pour le
+build et le runtime. L'espace admin s'authentifie via la session de
+l'utilisateur ; aucune clé privée n'est nécessaire côté serveur.
 
 ## Option B — Déploiement manuel depuis votre machine
 

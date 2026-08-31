@@ -5,7 +5,8 @@ import { supabaseForUser } from "../supabase";
 export default defineTool({
   name: "list_news",
   title: "Lister les actualités",
-  description: "Liste les actualités de l'AMAA (slug, date, catégorie, titres et chapôs trilingues).",
+  description:
+    "Liste les actualités de l'AMAA (slug, date, catégorie, titres et chapôs trilingues).",
   inputSchema: {
     limit: z.number().int().min(1).max(100).default(20).describe("Nombre maximum d'actualités."),
   },
@@ -18,8 +19,8 @@ export default defineTool({
     const supabase = supabaseForUser(ctx);
     const { data, error } = await supabase
       .from("news")
-      .select("slug,date,category,is_published,title,excerpt")
-      .order("date", { ascending: false })
+      .select("slug,published_on,category,is_published,title,excerpt")
+      .order("published_on", { ascending: false })
       .limit(limit ?? 20);
     if (error) return { content: [{ type: "text", text: error.message }], isError: true };
     return {

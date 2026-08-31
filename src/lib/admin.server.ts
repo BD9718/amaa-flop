@@ -1,6 +1,7 @@
 // Server-only helpers for the admin back-office.
 // All functions run with the caller's session (RLS enforced as the user),
 // after an explicit admin-role verification.
+import type { SupabaseClient } from "@supabase/supabase-js";
 
 export type L10n = { fr: string; ar: string; en: string };
 export type L10nList = { fr: string[]; ar: string[]; en: string[] };
@@ -66,13 +67,13 @@ export type MessageRow = {
   email: string;
   subject: string;
   message: string;
-  read: boolean;
+  is_read: boolean;
   created_at: string;
 };
 
-type Ctx = { supabase: any; userId: string };
+export type AdminContext = { supabase: SupabaseClient; userId: string };
 
-export async function requireAdmin(ctx: Ctx) {
+export async function requireAdmin(ctx: AdminContext) {
   const { data, error } = await ctx.supabase.rpc("has_role", {
     _user_id: ctx.userId,
     _role: "admin",
@@ -81,7 +82,7 @@ export async function requireAdmin(ctx: Ctx) {
   if (!data) throw new Error("Forbidden: admin role required");
 }
 
-export async function getAdminMe(ctx: Ctx) {
+export async function getAdminMe(ctx: AdminContext) {
   const { data } = await ctx.supabase.rpc("has_role", {
     _user_id: ctx.userId,
     _role: "admin",
@@ -92,11 +93,9 @@ export async function getAdminMe(ctx: Ctx) {
   return { isAdmin: Boolean(data), email: user?.email ?? "" };
 }
 
-export async function getOverview(ctx: Ctx) {
+export async function getOverview(ctx: AdminContext) {
   const count = async (table: string) => {
-    const { count: c } = await ctx.supabase
-      .from(table)
-      .select("*", { count: "exact", head: true });
+    const { count: c } = await ctx.supabase.from(table).select("*", { count: "exact", head: true });
     return c ?? 0;
   };
   const [projects, news, gallery, partners, figures] = await Promise.all([
@@ -109,17 +108,17 @@ export async function getOverview(ctx: Ctx) {
   const { count: unread } = await ctx.supabase
     .from("contact_messages")
     .select("*", { count: "exact", head: true })
-    .eq("read", false);
+    .eq("is_read", false);
   return { projects, news, gallery, partners, figures, unreadMessages: unread ?? 0 };
 }
 
-export async function listRows(ctx: Ctx, table: string, orderBy: string) {
+export async function listRows(ctx: AdminContext, table: string, orderBy: string) {
   const { data, error } = await ctx.supabase.from(table).select("*").order(orderBy);
   if (error) throw new Error(error.message);
   return data;
 }
 
-export async function upsertRow(ctx: Ctx, table: string, row: Record<string, unknown>) {
+export async function upsertRow(ctx: AdminContext, table: string, row: Record<string, unknown>) {
   const payload = { ...row };
   if (!payload["id"]) delete payload["id"];
   const { data, error } = await ctx.supabase.from(table).upsert(payload).select().single();
@@ -127,13 +126,13 @@ export async function upsertRow(ctx: Ctx, table: string, row: Record<string, unk
   return data;
 }
 
-export async function deleteRow(ctx: Ctx, table: string, id: string) {
+export async function deleteRow(ctx: AdminContext, table: string, id: string) {
   const { error } = await ctx.supabase.from(table).delete().eq("id", id);
   if (error) throw new Error(error.message);
   return { ok: true };
 }
 
-export async function listMessages(ctx: Ctx) {
+export async function listMessages(ctx: AdminContext) {
   const { data, error } = await ctx.supabase
     .from("contact_messages")
     .select("*")
@@ -142,8 +141,11 @@ export async function listMessages(ctx: Ctx) {
   return data as MessageRow[];
 }
 
-export async function setMessageRead(ctx: Ctx, id: string, read: boolean) {
-  const { error } = await ctx.supabase.from("contact_messages").update({ read }).eq("id", id);
+export async function setMessageRead(ctx: AdminContext, id: string, read: boolean) {
+  const { error } = await ctx.supabase
+    .from("contact_messages")
+    .update({ is_read: read })
+    .eq("id", id);
   if (error) throw new Error(error.message);
   return { ok: true };
 }
@@ -156,7 +158,7 @@ const EXT_BY_TYPE: Record<string, string> = {
 };
 
 export async function uploadMedia(
-  ctx: Ctx,
+  ctx: AdminContext,
   input: { fileName: string; contentType: string; dataBase64: string },
 ) {
   const ext = EXT_BY_TYPE[input.contentType];
@@ -179,7 +181,7 @@ export async function uploadMedia(
   return { path, url: await signMediaUrl(ctx, path) };
 }
 
-export async function signMediaUrl(ctx: Ctx, path: string): Promise<string> {
+export async function signMediaUrl(ctx: AdminContext, path: string): Promise<string> {
   if (!path || path.startsWith("http") || path.startsWith("/")) return path;
   const { data, error } = await ctx.supabase.storage
     .from("media")

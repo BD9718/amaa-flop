@@ -13,7 +13,6 @@ const selectCls =
 const CATEGORIES = [
   { value: "assainissement", label: "Assainissement" },
   { value: "sensibilisation", label: "Sensibilisation" },
-  { value: "formation", label: "Formation" },
   { value: "environnement", label: "Environnement" },
 ];
 

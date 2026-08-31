@@ -49,7 +49,7 @@ function MessagesPage() {
             <li
               key={m.id}
               className={`rounded-xl border bg-card p-4 ${
-                m.read ? "border-border" : "border-primary/40 shadow-soft"
+                m.is_read ? "border-border" : "border-primary/40 shadow-soft"
               }`}
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
@@ -71,12 +71,12 @@ function MessagesPage() {
                 <div className="flex shrink-0 gap-1">
                   <button
                     type="button"
-                    aria-label={m.read ? "Marquer non lu" : "Marquer lu"}
-                    title={m.read ? "Marquer non lu" : "Marquer lu"}
-                    onClick={() => readMutation.mutate({ id: m.id, read: !m.read })}
+                    aria-label={m.is_read ? "Marquer non lu" : "Marquer lu"}
+                    title={m.is_read ? "Marquer non lu" : "Marquer lu"}
+                    onClick={() => readMutation.mutate({ id: m.id, read: !m.is_read })}
                     className="rounded-md p-2 text-muted-foreground hover:bg-accent/60 hover:text-primary"
                   >
-                    {m.read ? <Mail className="size-4" /> : <MailOpen className="size-4" />}
+                    {m.is_read ? <Mail className="size-4" /> : <MailOpen className="size-4" />}
                   </button>
                   <button
                     type="button"
