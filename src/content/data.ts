@@ -654,6 +654,8 @@ export const contactInfo = {
   phone: "+222 42 99 99 71 / +222 22 37 74 47",
   phonePrimary: "+22242999971",
   email: "dramegawa1@gmail.com / mariemdra@gmail.com",
+  emailPrimary: "dramegawa1@gmail.com",
+  emailSecondary: "mariemdra@gmail.com",
   whatsapp: "22242999971",
   whatsappDisplay: "+222 42 99 99 71",
   whatsappSecondary: "22223774447",
