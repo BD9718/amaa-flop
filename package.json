@@ -8,8 +8,7 @@
     "build": "vite build",
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "preview:worker": "vite build && wrangler dev --config dist/server/wrangler.json --compatibility-flags nodejs_compat nodejs_compat_populate_process_env",
-    "deploy": "vite build && wrangler deploy --config dist/server/wrangler.json --compatibility-flags nodejs_compat nodejs_compat_populate_process_env",
+    "deploy": "bunx vercel deploy --prebuilt",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
@@ -89,7 +88,6 @@
     "prettier": "^3.7.3",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.56.1",
-    "vite": "8.1.5",
-    "wrangler": "^4.127.1"
+    "vite": "8.1.5"
   }
 }

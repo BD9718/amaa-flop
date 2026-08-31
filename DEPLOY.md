@@ -1,73 +1,54 @@
-# Déploiement Cloudflare Workers — AMAA
+# Déploiement Vercel — AMAA
 
-Le build de production (`bun run build`) génère un Worker Cloudflare complet dans
-`dist/` : `dist/server/index.mjs` (SSR + fonctions serveur) et `dist/client/`
-(assets statiques servis via le binding `ASSETS`).
+Le build de production (`bun run build`) génère directement la structure
+**Build Output API** de Vercel dans `.vercel/output` : la fonction SSR (+ les
+fonctions serveur) et les assets statiques. Aucune configuration
+supplémentaire n'est nécessaire.
 
-**Tout est déjà configuré.** Les variables non sensibles (`SUPABASE_URL`,
-`SUPABASE_PUBLISHABLE_KEY`) sont incluses dans `wrangler.json` — aucune autre
-variable n'est nécessaire (l'admin passe par la session utilisateur, aucune clé
-secrète côté serveur).
+## Option A — Déploiement via l'interface Vercel (recommandé)
 
-## Option A — Déploiement automatique (recommandé, zéro commande)
+1. Connectez le projet à GitHub depuis l'éditeur Lovable.
+2. Sur [vercel.com/new](https://vercel.com/new), importez le dépôt.
+3. Laissez les réglages par défaut : `vercel.json` fixe déjà
+   - Install : `bun install --frozen-lockfile`
+   - Build : `bun run build`
+   - Framework : aucun (sortie Build Output API détectée automatiquement)
+4. Cliquez sur **Deploy**. Chaque push sur `main` redéploie automatiquement,
+   et chaque branche/PR obtient une preview.
 
-Un workflow GitHub Actions est prêt dans `.github/workflows/deploy.yml` :
-chaque push sur `main` (ou chaque modification Lovable synchronisée) déploie
-automatiquement le Worker.
-
-Activation en 3 étapes, une seule fois :
-
-1. Créez un token API Cloudflare : dash.cloudflare.com → **My Profile →
-   API Tokens → Create Token** → modèle **Edit Cloudflare Workers** →
-   portée « votre compte ».
-2. Dans le dépôt GitHub du projet → **Settings → Secrets and variables →
-   Actions → New repository secret**, ajoutez :
-   - `CLOUDFLARE_API_TOKEN` = le token créé à l'étape 1
-   - `CLOUDFLARE_ACCOUNT_ID` = votre Account ID (visible en bas à droite du
-     dashboard Cloudflare, page Workers)
-3. C'est tout : le prochain push déploie sur
-   `https://amaa-connect-hub.<votre-compte>.workers.dev`. Vous pouvez aussi
-   lancer manuellement via **Actions → Deploy to Cloudflare Workers → Run
-   workflow**.
+Aucune variable d'environnement n'est requise : les identifiants publics du
+backend (URL + clé publiable) sont injectés au build, et l'espace admin
+s'authentifie via la session de l'utilisateur (aucune clé secrète côté
+serveur).
 
 ## Option B — Déploiement manuel depuis votre machine
 
 ```bash
-bunx wrangler login
-bun run deploy
+bun run build
+bunx vercel login
+bun run deploy          # vercel deploy --prebuilt
 ```
 
-Pour un test local du Worker avant déploiement : `bun run preview:worker`
-(copiez d'abord `.env` vers `.dev.vars` à la racine, jamais commité).
-
-Cette commande reconstruit le site puis publie le Worker sous le nom
-`amaa-connect-hub` (défini dans `wrangler.json`). Les flags
-`nodejs_compat` et `nodejs_compat_populate_process_env` sont passés par le
-script car le code serveur lit `process.env`.
-
-Pour un test local du Worker avant déploiement :
-
-```bash
-bun run preview:worker
-```
+Ajoutez `--prod` pour publier en production :
+`bunx vercel deploy --prebuilt --prod`.
 
 ## Domaine personnalisé
 
-1. `bunx wrangler domains add amaa.example.org` (ou via le dashboard Cloudflare
-   → Workers → amaa-connect-hub → Settings → Domains & Routes).
+1. Vercel → projet → **Settings → Domains → Add**, puis suivez les
+   instructions DNS.
 2. Mettez ensuite à jour le domaine canonique dans le code :
    - `src/routes/sitemap[.]xml.ts` → constante `BASE_URL`
    - `src/content/media.ts` → `siteOrigin`
    - `public/robots.txt` → directive `Sitemap:`
-   - URLs `hreflang`/`og:url` générées via `src/lib/seo.ts` (basées sur `siteOrigin`)
+   - Les URLs `hreflang`/`og:url` générées via `src/lib/seo.ts` suivent
+     automatiquement `siteOrigin`.
 
 ## Notes
 
 - `robots.txt` et le sitemap pointent actuellement vers
-  `https://amaa-connect-hub.lovable.app` : changez-les si le domaine Cloudflare
-  devient l'URL principale pour éviter les signaux SEO contradictoires.
-- L'instance Supabase/Lovable Cloud (auth, base de données, stockage) reste
-  hébergée telle quelle ; le Worker s'y connecte via HTTPS.
-- Ne jamais éditer `dist/server/wrangler.json` : il est régénéré à chaque
-  build. La personnalisation persistante se fait dans le `wrangler.json` racine
-  (fusionné automatiquement au build).
+  `https://amaa-connect-hub.lovable.app` : changez-les si le domaine Vercel
+  devient l'URL principale, pour éviter des signaux SEO contradictoires.
+- Le backend (auth, base de données, stockage) reste hébergé tel quel ;
+  les fonctions Vercel s'y connectent en HTTPS.
+- Ne jamais éditer le contenu de `.vercel/output` : il est régénéré à chaque
+  build.
