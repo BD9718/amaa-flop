@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import type { ToolContext } from "@lovable.dev/mcp-js";
+import { supabasePublishableKey as envPublishableKey, supabaseUrl as envSupabaseUrl } from "@/lib/env";
 
 type RuntimeGlobals = typeof globalThis & {
   Deno?: { env?: { get?: (name: string) => string | undefined } };
@@ -20,7 +21,7 @@ function configuredEnv(names: readonly string[]): string | undefined {
 }
 
 function supabaseProjectUrl(): string {
-  return configuredEnv(["SUPABASE_URL", "VITE_SUPABASE_URL"]) ?? supabaseUrlFallback;
+  return envSupabaseUrl();
 }
 
 function supabasePublishableKey(): string {
