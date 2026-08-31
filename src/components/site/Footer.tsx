@@ -51,7 +51,7 @@ export function Footer({ locale }: { locale: Locale }) {
           <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <Phone className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
-              <a href={`tel:${contactInfo.phone.replace(/\s/g, "")}`} className="hover:text-primary" dir="ltr">
+              <a href={`tel:${contactInfo.phonePrimary}`} className="hover:text-primary" dir="ltr">
                 {contactInfo.phone}
               </a>
             </li>
