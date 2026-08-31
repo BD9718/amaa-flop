@@ -7,6 +7,7 @@ export function pageHead(opts: {
   title: string;
   description: string;
   image?: string;
+  ogType?: "website" | "article";
 }) {
   const locale = normalizeLocale(opts.locale);
   const url = `${siteOrigin}/${locale}${opts.path}`;
@@ -15,7 +16,8 @@ export function pageHead(opts: {
     { name: "description", content: opts.description },
     { property: "og:title", content: opts.title },
     { property: "og:description", content: opts.description },
-    { property: "og:type", content: "website" },
+    { property: "og:type", content: opts.ogType ?? "website" },
+    { property: "og:url", content: url },
     { property: "og:locale", content: locale === "ar" ? "ar_MR" : locale === "en" ? "en_US" : "fr_FR" },
     { name: "twitter:card", content: "summary_large_image" },
   ];

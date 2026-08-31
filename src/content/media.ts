@@ -7,4 +7,4 @@ export const media = {
   sludgeTreatment: "/__l5e/assets-v1/c14a7dda-61a1-47f6-8ba2-6b083feef03f/traitement-boues-vidange.jpg",
 } as const;
 
-export const siteOrigin = "https://id-preview--13faef88-649f-4149-b51e-1445dd0b004a.lovable.app";
+export const siteOrigin = "https://amaa-connect-hub.lovable.app";

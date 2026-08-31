@@ -24,6 +24,7 @@ export const Route = createFileRoute("/$locale/news/$slug")({
       title: `${a.title[locale]} — AMAA`,
       description: a.excerpt[locale],
       image: a.cover,
+      ogType: "article",
     });
   },
   component: ArticlePage,
