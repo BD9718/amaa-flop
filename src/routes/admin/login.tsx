@@ -4,7 +4,13 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Logo } from "@/components/site/Logo";
 
+function safeNext(value: unknown): string | undefined {
+  if (typeof value !== "string" || !value.startsWith("/") || value.startsWith("//")) return undefined;
+  return value;
+}
+
 export const Route = createFileRoute("/admin/login")({
+  validateSearch: (s: Record<string, unknown>) => ({ next: safeNext(s["next"]) }),
   head: () => ({
     meta: [
       { title: "Connexion — Administration AMAA" },
@@ -17,6 +23,7 @@ export const Route = createFileRoute("/admin/login")({
 function AdminLoginPage() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { next } = Route.useSearch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,6 +42,10 @@ function AdminLoginPage() {
     // The layout caches a "signed-out" result while on /admin/login —
     // invalidate it so the fresh session is evaluated after navigation.
     await queryClient.invalidateQueries({ queryKey: ["admin-me"] });
+    if (next) {
+      window.location.href = next;
+      return;
+    }
     navigate({ to: "/admin" });
   }
 
