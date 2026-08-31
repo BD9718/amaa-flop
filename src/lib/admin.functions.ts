@@ -27,16 +27,29 @@ export const getOverviewFn = createServerFn({ method: "GET" })
 
 export const listContentFn = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
-  .validator((data) => z.object({ table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]) }).parse(data))
+  .validator((data) =>
+    z
+      .object({ table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]) })
+      .parse(data),
+  )
   .handler(async ({ context, data }) => {
     await requireAdmin(context as any);
-    return listRows(context as any, data.table, data.table === "news" ? "published_on" : "sort_order");
+    return listRows(
+      context as any,
+      data.table,
+      data.table === "news" ? "published_on" : "sort_order",
+    );
   });
 
 export const upsertContentFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .validator((data) =>
-    z.object({ table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]), row: z.record(z.string(), z.unknown()) }).parse(data),
+    z
+      .object({
+        table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]),
+        row: z.record(z.string(), z.unknown()),
+      })
+      .parse(data),
   )
   .handler(async ({ context, data }) => {
     await requireAdmin(context as any);
@@ -45,7 +58,14 @@ export const upsertContentFn = createServerFn({ method: "POST" })
 
 export const deleteContentFn = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .validator((data) => z.object({ table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]), id: z.string() }).parse(data))
+  .validator((data) =>
+    z
+      .object({
+        table: z.enum(["projects", "news", "gallery_items", "partners", "key_figures"]),
+        id: z.string(),
+      })
+      .parse(data),
+  )
   .handler(async ({ context, data }) => {
     await requireAdmin(context as any);
     return deleteRow(context as any, data.table, data.id);

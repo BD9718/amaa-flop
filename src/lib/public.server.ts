@@ -98,7 +98,9 @@ function mapNews(row: NewsRow): NewsArticle {
 export async function listProjectsServer(): Promise<Project[]> {
   const { data, error } = await publicClient()
     .from("projects")
-    .select("slug,status,is_published,cover_url,cover_alt,title,summary,location,period,context,problem,objectives,beneficiaries,activities,results,partners,gallery")
+    .select(
+      "slug,status,is_published,cover_url,cover_alt,title,summary,location,period,context,problem,objectives,beneficiaries,activities,results,partners,gallery",
+    )
     .eq("is_published", true)
     .order("sort_order", { ascending: true });
   if (error) throw new Error(error.message);
@@ -108,7 +110,9 @@ export async function listProjectsServer(): Promise<Project[]> {
 export async function getProjectServer(slug: string): Promise<Project | null> {
   const { data, error } = await publicClient()
     .from("projects")
-    .select("slug,status,is_published,cover_url,cover_alt,title,summary,location,period,context,problem,objectives,beneficiaries,activities,results,partners,gallery")
+    .select(
+      "slug,status,is_published,cover_url,cover_alt,title,summary,location,period,context,problem,objectives,beneficiaries,activities,results,partners,gallery",
+    )
     .eq("slug", slug)
     .eq("is_published", true)
     .maybeSingle();
@@ -158,7 +162,9 @@ export async function listPartnersServer(): Promise<Partner[]> {
     .select("name,type,logo_url,website")
     .order("sort_order", { ascending: true });
   if (error) throw new Error(error.message);
-  return (data as { name: L10n; type: L10n; logo_url: string | null; website: string | null }[]).map((row) => ({
+  return (
+    data as { name: L10n; type: L10n; logo_url: string | null; website: string | null }[]
+  ).map((row) => ({
     name: row.name,
     type: row.type,
     logoUrl: row.logo_url,

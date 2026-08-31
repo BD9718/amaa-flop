@@ -5,7 +5,8 @@ import { supabaseForUser } from "../supabase";
 export default defineTool({
   name: "list_news",
   title: "Lister les actualités",
-  description: "Liste les actualités de l'AMAA (slug, date, catégorie, titres et chapôs trilingues).",
+  description:
+    "Liste les actualités de l'AMAA (slug, date, catégorie, titres et chapôs trilingues).",
   inputSchema: {
     limit: z.number().int().min(1).max(100).default(20).describe("Nombre maximum d'actualités."),
   },

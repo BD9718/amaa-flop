@@ -94,9 +94,7 @@ export async function getAdminMe(ctx: Ctx) {
 
 export async function getOverview(ctx: Ctx) {
   const count = async (table: string) => {
-    const { count: c } = await ctx.supabase
-      .from(table)
-      .select("*", { count: "exact", head: true });
+    const { count: c } = await ctx.supabase.from(table).select("*", { count: "exact", head: true });
     return c ?? 0;
   };
   const [projects, news, gallery, partners, figures] = await Promise.all([
