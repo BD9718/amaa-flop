@@ -77,19 +77,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AMAA — Association Mauritanienne pour l'Assainissement" },
-      {
-        name: "description",
-        content:
-          "AMAA agit en Mauritanie pour l'assainissement, la santé publique et la protection de l'environnement.",
-      },
       { name: "author", content: "AMAA" },
-      { property: "og:title", content: "AMAA — Association Mauritanienne pour l'Assainissement" },
-      {
-        property: "og:description",
-        content:
-          "Assainissement, sensibilisation et formation au service de la santé publique en Mauritanie.",
-      },
+      { property: "og:site_name", content: "AMAA" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
