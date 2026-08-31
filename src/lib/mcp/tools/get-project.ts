@@ -7,6 +7,7 @@ export default defineTool({
   title: "Détail d'un projet",
   description: "Récupère le détail complet d'un projet de l'AMAA à partir de son slug.",
   inputSchema: { slug: z.string().trim().min(1).describe("Slug du projet, ex. « vaccination-vidangeurs ».") },
+  outputSchema: { project: z.any() },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ slug }, ctx) => {
     if (!ctx.isAuthenticated()) {

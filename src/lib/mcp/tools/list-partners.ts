@@ -9,6 +9,7 @@ export default defineTool({
   inputSchema: {
     limit: z.number().int().min(1).max(100).default(50).describe("Nombre maximum de partenaires."),
   },
+  outputSchema: { partners: z.array(z.any()) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ limit }, ctx) => {
     if (!ctx.isAuthenticated()) {

@@ -9,6 +9,7 @@ export default defineTool({
   inputSchema: {
     limit: z.number().int().min(1).max(100).default(20).describe("Nombre maximum d'actualités."),
   },
+  outputSchema: { news: z.array(z.any()) },
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: async ({ limit }, ctx) => {
     if (!ctx.isAuthenticated()) {
