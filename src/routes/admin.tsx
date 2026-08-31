@@ -57,7 +57,10 @@ function AdminLayout() {
 
   useEffect(() => {
     if (pathname === "/admin/login") return;
-    if (!isLoading && (isError || !data || !data.isAdmin)) {
+    // Wait for any in-flight refetch (e.g. right after sign-in) before
+    // judging access, otherwise stale "signed-out" data triggers a logout.
+    if (isLoading || isFetching) return;
+    if (isError || !data || !data.isAdmin) {
       void (async () => {
         if (data && !data.isAdmin) {
           // Signed in but not an admin: sign out to avoid confusion.
@@ -66,11 +69,11 @@ function AdminLayout() {
         navigate({ to: "/admin/login" });
       })();
     }
-  }, [data, isLoading, isError, pathname, navigate]);
+  }, [data, isLoading, isFetching, isError, pathname, navigate]);
 
   if (pathname === "/admin/login") return <Outlet />;
 
-  if (isLoading || !data?.isAdmin) {
+  if (isLoading || isFetching || !data?.isAdmin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-secondary/40">
         <p className="text-sm text-muted-foreground">Vérification des accès…</p>
