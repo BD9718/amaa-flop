@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import type { GalleryItem, NewsArticle, Project } from "@/content/data";
+import { supabasePublishableKey, supabaseUrl } from "@/lib/env";
 
 type L10n = Record<"fr" | "ar" | "en", string>;
 type L10nList = Record<"fr" | "ar" | "en", string[]>;
@@ -20,7 +21,7 @@ export type KeyFigure = {
 function publicClient() {
   // Lazy import keeps the Supabase client out of the client bundle.
   return import("@supabase/supabase-js").then(({ createClient }) =>
-    createClient(process.env["SUPABASE_URL"]!, process.env["SUPABASE_PUBLISHABLE_KEY"]!, {
+    createClient(supabaseUrl(), supabasePublishableKey(), {
       auth: { persistSession: false, autoRefreshToken: false },
     }),
   );
