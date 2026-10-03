@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { supabasePublishableKey, supabaseUrl } from "@/lib/env";
 
-const BASE_URL = "https://amaa-connect-hub.lovable.app";
+const BASE_URL = "https://www.amaa-mr.com";
 const LOCALES = ["fr", "ar", "en"] as const;
 const STATIC_PATHS = ["", "/about", "/actions", "/projects", "/news", "/gallery", "/partners", "/contact"];
 
