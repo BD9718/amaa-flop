@@ -9,6 +9,7 @@
   },
   "build": {
     "env": {
+      "NITRO_PRESET": "vercel",
       "VITE_SUPABASE_URL": "https://gfhbytrfrwzkhfbsiptw.supabase.co",
       "VITE_SUPABASE_PUBLISHABLE_KEY": "sb_publishable_yvqYc_SeYk7dQs-BdLBxGQ_c4dQ3OFt",
       "VITE_SUPABASE_PROJECT_ID": "gfhbytrfrwzkhfbsiptw"
