@@ -3,22 +3,18 @@
  *
  * The URL and publishable key are public values (safe to embed) — they only
  * grant the access allowed by the database's row-level security policies.
- * Environment variables take precedence when set (Lovable Cloud injects them);
- * the literals below make the app work on external hosts (Vercel, etc.)
- * without any extra configuration.
+ * They are pinned on purpose: the Vercel dashboard held stale env vars
+ * pointing to an old backend, which overrode the correct values and broke
+ * every data page. Never read them from process.env.
  */
 
-const FALLBACK_URL = "https://gfhbytrfrwzkhfbsiptw.supabase.co";
-const FALLBACK_PUBLISHABLE_KEY = "sb_publishable_yvqYc_SeYk7dQs-BdLBxGQ_c4dQ3OFt";
+const BACKEND_URL = "https://gfhbytrfrwzkhfbsiptw.supabase.co";
+const BACKEND_PUBLISHABLE_KEY = "sb_publishable_yvqYc_SeYk7dQs-BdLBxGQ_c4dQ3OFt";
 
 export function supabaseUrl(): string {
-  return process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"] ?? FALLBACK_URL;
+  return BACKEND_URL;
 }
 
 export function supabasePublishableKey(): string {
-  return (
-    process.env["SUPABASE_PUBLISHABLE_KEY"] ??
-    process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
-    FALLBACK_PUBLISHABLE_KEY
-  );
+  return BACKEND_PUBLISHABLE_KEY;
 }
