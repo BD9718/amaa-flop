@@ -40,7 +40,6 @@ import { Route as LocaleProjectsIndexRouteImport } from './routes/$locale.projec
 import { Route as LocaleProjectsSlugRouteImport } from './routes/$locale.projects.$slug'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
-import { Route as ApiPublicDiagRouteImport } from './routes/api/public/diag'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -200,11 +199,6 @@ const Char91DotmcpChar93InvokeToolToolRoute =
     path: '/.mcp/invoke-tool/$tool',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiPublicDiagRoute = ApiPublicDiagRouteImport.update({
-  id: '/api/public/diag',
-  path: '/api/public/diag',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -236,7 +230,6 @@ export interface FileRoutesByFullPath {
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/api/public/diag': typeof ApiPublicDiagRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
@@ -268,7 +261,6 @@ export interface FileRoutesByTo {
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/api/public/diag': typeof ApiPublicDiagRoute
   '/$locale/news': typeof LocaleNewsIndexRoute
   '/$locale/projects': typeof LocaleProjectsIndexRoute
 }
@@ -303,7 +295,6 @@ export interface FileRoutesById {
   '/$locale/projects/$slug': typeof LocaleProjectsSlugRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
-  '/api/public/diag': typeof ApiPublicDiagRoute
   '/$locale/news/': typeof LocaleNewsIndexRoute
   '/$locale/projects/': typeof LocaleProjectsIndexRoute
 }
@@ -339,7 +330,6 @@ export interface FileRouteTypes {
     | '/$locale/projects/$slug'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/api/public/diag'
     | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesByTo: FileRoutesByTo
@@ -371,7 +361,6 @@ export interface FileRouteTypes {
     | '/$locale/projects/$slug'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/api/public/diag'
     | '/$locale/news'
     | '/$locale/projects'
   id:
@@ -405,7 +394,6 @@ export interface FileRouteTypes {
     | '/$locale/projects/$slug'
     | '/.lovable/oauth/consent'
     | '/.mcp/invoke-tool/$tool'
-    | '/api/public/diag'
     | '/$locale/news/'
     | '/$locale/projects/'
   fileRoutesById: FileRoutesById
@@ -422,7 +410,6 @@ export interface RootRouteChildren {
   Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
   Char91DotmcpChar93InvokeToolToolRoute: typeof Char91DotmcpChar93InvokeToolToolRoute
-  ApiPublicDiagRoute: typeof ApiPublicDiagRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -644,13 +631,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof Char91DotmcpChar93InvokeToolToolRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/diag': {
-      id: '/api/public/diag'
-      path: '/api/public/diag'
-      fullPath: '/api/public/diag'
-      preLoaderRoute: typeof ApiPublicDiagRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -724,7 +704,6 @@ const rootRouteChildren: RootRouteChildren = {
     Char91DotwellKnownChar93OauthProtectedResourceRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
   Char91DotmcpChar93InvokeToolToolRoute: Char91DotmcpChar93InvokeToolToolRoute,
-  ApiPublicDiagRoute: ApiPublicDiagRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
