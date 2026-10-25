@@ -8,4 +8,4 @@ export const media = {
   sludgeTreatment: "/images/traitement-boues-vidange.jpg",
 } as const;
 
-export const siteOrigin = "https://www.amaa-mr.com";
+export const siteOrigin = "https://amaa-mr.com";
