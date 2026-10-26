@@ -5,6 +5,7 @@ import { signMediaUrlFn, uploadMediaFn } from "@/lib/admin.functions";
 import type { L10n, L10nList } from "@/lib/admin.server";
 import { resolveImage } from "@/content/media";
 import { resolveImage } from "@/content/media";
+import { resolveImage } from "@/content/media";
 
 const LOCALES = [
   { key: "fr" as const, label: "Français" },
