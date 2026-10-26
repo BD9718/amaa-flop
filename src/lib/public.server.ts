@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import type { GalleryItem, NewsArticle, Project } from "@/content/data";
 import { supabasePublishableKey, supabaseUrl } from "@/lib/env";
+import { resolveImage } from "@/content/media";
 
 type L10n = Record<"fr" | "ar" | "en", string>;
 type L10nList = Record<"fr" | "ar" | "en", string[]>;
@@ -64,7 +65,7 @@ function mapProject(row: ProjectRow): Project {
   return {
     slug: row.slug,
     status: row.status === "done" ? "done" : "upcoming",
-    cover: row.cover_url ?? "",
+    cover: resolveImage(row.cover_url),
     coverAlt: row.cover_alt,
     title: row.title,
     summary: row.summary,
@@ -77,7 +78,7 @@ function mapProject(row: ProjectRow): Project {
     activities: row.activities,
     results: row.results,
     partners: row.partners,
-    gallery: row.gallery ?? [],
+    gallery: (row.gallery ?? []).map((g) => ({ ...g, src: resolveImage(g.src) })),
   };
 }
 
@@ -88,7 +89,7 @@ function mapNews(row: NewsRow): NewsArticle {
     category: (["institutionnel", "terrain", "formation"].includes(row.category)
       ? row.category
       : "institutionnel") as NewsArticle["category"],
-    cover: row.cover_url ?? "",
+    cover: resolveImage(row.cover_url),
     title: row.title,
     excerpt: row.excerpt,
     body: row.body,
@@ -148,7 +149,7 @@ export async function listGalleryServer(): Promise<GalleryItem[]> {
     .order("sort_order", { ascending: true });
   if (error) throw new Error(error.message);
   return (data as { image_url: string; category: string; caption: L10n }[]).map((row) => ({
-    src: row.image_url,
+    src: resolveImage(row.image_url),
     category: (["assainissement", "sensibilisation", "environnement"].includes(row.category)
       ? row.category
       : "assainissement") as GalleryItem["category"],
@@ -167,7 +168,7 @@ export async function listPartnersServer(): Promise<Partner[]> {
   ).map((row) => ({
     name: row.name,
     type: row.type,
-    logoUrl: row.logo_url,
+    logoUrl: row.logo_url ? resolveImage(row.logo_url) : null,
     website: row.website,
   }));
 }
