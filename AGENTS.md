@@ -11,3 +11,5 @@
 
 ## Rules
 - Server-side backend URL/publishable key are pinned constants in src/lib/env.ts, never read from process.env — the Vercel dashboard held stale env vars that silently pointed production at a dead backend.
+
+- Site photos are served from Lovable asset pointers (src/assets/*.asset.json) via src/content/media.ts; resolveImage() maps legacy "/images/..." database paths — Lovable hosting does not serve public/images, so those paths 404 on amaa-mr.com.

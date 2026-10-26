@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { Upload, X } from "lucide-react";
 import { signMediaUrlFn, uploadMediaFn } from "@/lib/admin.functions";
 import type { L10n, L10nList } from "@/lib/admin.server";
+import { resolveImage } from "@/content/media";
 
 const LOCALES = [
   { key: "fr" as const, label: "Français" },
@@ -185,7 +186,7 @@ export function ImageField({
     };
   }, [value, sign]);
 
-  const displaySrc = value.startsWith("http") || value.startsWith("/") ? value : preview;
+  const displaySrc = value.startsWith("http") || value.startsWith("/") ? resolveImage(value) : preview;
 
   async function onFile(file: File) {
     setBusy(true);
