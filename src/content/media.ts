@@ -29,4 +29,4 @@ export function resolveImage(src: string | null | undefined): string {
   return legacyPaths[src] ?? src;
 }
 
-export const siteOrigin = "https://www.amaa-mr.com";
+export const siteOrigin = "https://amaa-mr.com";
